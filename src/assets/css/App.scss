@@ -1,0 +1,71 @@
+@import "./variables.scss";
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 19.6px;
+  box-sizing: border-box;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+p {
+  strong {
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+h3 {
+  margin: 0;
+  margin-bottom: 30px;
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+  line-height: 32px;
+}
+
+h4, .h4 {
+  margin-bottom: 30px;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.blur {
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+a, .link {
+  color: $black;
+}
+
+a, .link:visited {
+  color: $dark-grey;
+}
+
+.button {
+  color: $white;
+  font-size: 1em;
+  min-height: 40px;
+  cursor: pointer;
+  font-weight: 700;
+  padding: 2px 40px;
+}
+
+.button:hover,
+.button:focus {
+  border: 1px solid $blue;
+  outline: none;
+}
+
+.blue {
+  background: linear-gradient(to right,#1bbfac,#1bbfba);
+  color: #fff;
+}

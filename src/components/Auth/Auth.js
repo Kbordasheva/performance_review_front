@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {login} from "../../store/actions/auth";
 // import Spinner from '../Shared/Spinner/Spinner';
-// import "./Auth.scss";
+import "./Auth.scss";
 
 const Auth = () => {
     const dispatch = useDispatch();
@@ -56,11 +56,11 @@ const Auth = () => {
                     name="password"
                     onChange={onChange}
                 />
-                <label className="sc-fzoJus bPIkEp">
+                <label>
                     <input type="checkbox" name="remember" onChange={onChange}/>
                     Remember me
                 </label>
-                <button className="button red btn-login main-btn" type="submit">
+                <button className="button blue btn-login main-btn" type="submit">
                     Login
                 </button>
             </form>

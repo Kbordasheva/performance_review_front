@@ -1,0 +1,57 @@
+@import "../../assets/css/variables.scss";
+
+.login-container {
+  margin: 0 auto;
+  margin-top: 100px;
+  width: fit-content;
+
+  svg {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .login-form {
+    padding: 50px 75px 58px;
+    margin-top: 50px;
+    height: 450px;
+    width: 440px;
+    background-color: $light-grey;
+    box-sizing: border-box;
+
+    h3 {
+      margin: 0;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.1px;
+      line-height: 32px;
+    }
+
+    label {
+      font-size: 17px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      margin: 7px 0px 15px;
+      min-height: 50px;
+      padding: 11px;
+      border: 1px solid $grey;
+      width: 100%;
+      font-size: 20px;
+      box-sizing: border-box;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .btn-login {
+      border-radius: 5px;
+      border: none;
+      margin-top: 20px;
+      min-width: 100%;
+      font-weight: bold;
+    }
+  }
+}
