@@ -43,11 +43,58 @@ const logout = () => {
     };
 };
 
+const reviewListLoaded = (data) => {
+    return {
+        type: types.REVIEW_LIST_LOADED,
+        payload: {
+            next: data.next,
+            reviewList: data.results,
+            previous: data.previous,
+        },
+    };
+};
+
+const reviewListUpdated = (data) => {
+    return {
+        type: types.REVIEW_LIST_UPDATED,
+        payload: {
+            next: data.next,
+            reviewList: data.results,
+            previous: data.previous,
+        },
+    };
+};
+
+const reviewListError = () => {
+    return {
+        type: types.REVIEW_LIST_ERROR,
+        payload: {
+            next: null,
+            reviewList: null,
+            previous: null,
+        },
+    };
+};
+
+const reviewListUpdate = (data) => {
+    return {
+        type: types.REVIEW_LIST_UPDATE,
+        payload: {
+            reviewList: data.reviewList,
+            reviewId: data.reviewId,
+        },
+    };
+};
+
 const logger = {
     loginStart,
     loginSuccess,
     logout,
     loginError,
+    reviewListLoaded,
+    reviewListUpdated,
+    reviewListError,
+    reviewListUpdate
 }
 
 export default logger
