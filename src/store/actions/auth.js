@@ -35,11 +35,9 @@ export const checkAuthTimeout = (expirationTime) => {
 };
 
 export const authCheckState = () => {
-    console.log("IN authCheckState")
     return (dispatch, getState) => {
         const {auth: {token, expirationDate}} = getState()
         if (!token) {
-            console.log("Logout")
 
             dispatch(logout(false));
         } else {
