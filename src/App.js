@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import React, { useEffect } from "react";
@@ -7,6 +6,7 @@ import Layout from "./components/Layouts/MainLayout/Layout";
 import Auth from "./components/Auth/Auth";
 import Dashboard from "./components/Dashboard/Dashboard";
 import PrivateRoute from "./components/Routing/PrivateRoute";
+import "./assets/css/App.scss";
 
 const App = () => {
     const dispatch = useDispatch();
