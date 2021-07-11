@@ -69,3 +69,12 @@ a, .link:visited {
   background: linear-gradient(to right,#1bbfac,#1bbfba);
   color: #fff;
 }
+
+.no-data {
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+
+  font-size: 18px;
+}

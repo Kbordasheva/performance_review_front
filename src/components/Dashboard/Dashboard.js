@@ -1,12 +1,12 @@
 import React from "react";
-// import "./Dashboard.scss";
+import "./Dashboard.scss";
+import ReviewList from "./ReviewList/ReviewList";
 
 const Dashboard = () => {
 
     return (
-    <div className="requests-container">
-      dashboard
-      {/*<RequestList/>*/}
+    <div className="reviews-container">
+      <ReviewList/>
     </div>
   );
 };

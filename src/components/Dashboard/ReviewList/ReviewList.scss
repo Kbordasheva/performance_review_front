@@ -1,0 +1,12 @@
+@import "../../../assets/css/variables";
+
+.ReviewList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3vw 5vw;
+  overflow: visible !important;
+}
+
+.panel-top-row {
+  display: inline-block;
+}
