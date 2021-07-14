@@ -4,9 +4,7 @@ import ReactTooltip from "react-tooltip";
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-// import notesImg from "../../../assets/img/note.svg";
 import classNames from "classnames";
-// import QuestionIcon from "../../../assets/img/icons/Question.svg"
 import "./FormElements.scss";
 
 import {

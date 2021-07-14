@@ -113,6 +113,26 @@ const profileDetailsError = () => {
     };
 };
 
+const generalInfoUpdated = (data) => {
+    return {
+        type: types.GENERAL_INFO_UPDATED,
+        payload: {
+            generalInfo: data,
+        },
+    };
+};
+
+const skillsLoad = (data) => {
+    return {
+        type: types.SKILLS_LOAD,
+        payload: {
+            next: data.next,
+            skills: data.results,
+            previous: data.previous,
+        },
+    };
+}
+
 const logger = {
     loginStart,
     loginSuccess,
@@ -124,7 +144,9 @@ const logger = {
     reviewListUpdate,
     profileDetailsLoaded,
     profileDetailsUpdated,
-    profileDetailsError
+    profileDetailsError,
+    generalInfoUpdated,
+    skillsLoad
 }
 
 export default logger

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProfileDetails } from "../../store/actions/profileDetails";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
+import "./Profile.scss"
 
 const Profile = ({match}) => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const Profile = ({match}) => {
                 <GeneralInfo
                     employeeId={genInfo.id}
                     fullName={genInfo.fullName}
-                    fullNameRu={genInfo.fullNameRu}
+                    fullNameRu={genInfo?.fullNameRu.trim() ? genInfo?.fullNameRu : ''}
                     gender={genInfo.gender}
                     birthDate={genInfo.birthDate}
                     email={genInfo.email}
@@ -40,11 +41,11 @@ const Profile = ({match}) => {
                     dismissDate={genInfo.dismissDate}
                     position={genInfo.position}
                     seniority={genInfo.seniority || ""}
-                    unit={genInfo.unit.name}
+                    unit_id={genInfo.unit?.id || ""}
                     manager={genInfo.unit.manager}
+                    skills={genInfo.skills}
                 />
             </div>
-
         </section>
     );
 };

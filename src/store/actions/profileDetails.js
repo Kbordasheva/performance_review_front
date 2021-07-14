@@ -13,3 +13,35 @@ export const getProfileDetails = (id) => {
             });
     };
 };
+
+export const editGeneralInfo = (id, data) => {
+    return dispatch => {
+        axios.put(`/api/v1/employees/${id}/`, data)
+            .then(response => {
+                dispatch(actionCreators.generalInfoUpdated(response.data));
+            })
+            .catch(error => {
+                console.error(error);
+                dispatch(actionCreators.profileDetailsError());
+            });
+    };
+};
+
+export const getSkills = () => async (dispatch) => {
+    try {
+        const response = await axios.get('/api/v1/employees/skills/');
+        dispatch(actionCreators.skillsLoad(response.data.results));
+        return response.data.results;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const setEmployeeSkill = (id, skills) => async dispatch => {
+    try {
+        const response = await axios.post(`/api/v1/employees/${id}/skills/`, skills);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};

@@ -18,7 +18,13 @@ const profileDetailsReducer = (state = initialState, action) => {
     case types.PROFILE_DETAILS_ERROR:
         return {
             profile: action.payload.profile,
-    }
+        };
+    case types.GENERAL_INFO_UPDATED:
+            return {
+                profile: { ...state.profile,
+                    generalInfo: { ...state.profile.employee,
+                    }}
+        };
     default:
         return {
             ...state,
