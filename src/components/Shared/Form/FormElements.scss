@@ -1,0 +1,136 @@
+.form-group {
+  .form-control {
+    display: inline-block;
+  }
+  .form-control:disabled {
+    border: none;
+    background: none;
+  }
+
+  label {
+    font-weight: 700;
+  }
+
+  .custom-control-label {
+    padding-right: 20px;
+  }
+
+  .option-inline {
+    display: inline-block;
+    margin-right: 20px;
+  }
+
+  .field-array {
+    display: inline-block;
+    padding: 0;
+
+    .form-control {
+      width: 60%;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .btn-control {
+    padding: 0;
+    height: 38px;
+    width: 40px;
+    margin-left: 3px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #495057;
+    border: 1px solid #ced4da;
+  }
+}
+
+.btn-form {
+  border: 1px solid white;
+  display: inline-block;
+}
+.select-group {
+  .form-control {
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
+.form-group select#currency {
+  margin-right: 5px;
+}
+.textarea-group {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  textarea {
+    min-height: 100px;
+    margin-top: 10px;
+    border: 1px solid #ced4da !important;
+  }
+}
+
+.react-datepicker__tab-loop {
+  display: inline-block;
+}
+
+.notify-icon {
+  width: 20px;
+  height: 25px;
+  margin-left: 5px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.react-datepicker-popper {
+  z-index: 1 !important;
+}
+.time-input {
+  width: 220px;
+}
+
+.note {
+  width: 100%;
+
+  p {
+    margin: 15px 0 0 15px;
+  }
+}
+
+.notes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  &-buttons {
+    margin-top: 1rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.modal-relocation-container {
+  .form-group {
+    width: 350px;
+    label {
+      flex: 0 0 38%;
+    }
+  }
+}
+
+.custom-radio, .textarea-group {
+  .tooltip-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+}

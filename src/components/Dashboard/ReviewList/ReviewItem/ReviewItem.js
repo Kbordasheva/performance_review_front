@@ -1,4 +1,5 @@
 import "./ReviewItem.scss"
+import { Link } from "react-router-dom";
 
 const ReviewItem = ({review}) => {
   const employee = review.employee;
@@ -7,7 +8,7 @@ const ReviewItem = ({review}) => {
     <article className="ReviewItem">
       <div className="info-name">
         <p className="ReviewItem__name">
-          <h4>{employee.fullName}</h4>
+          <Link to={'/profile/' + review.id}>{employee.fullName}</Link>
         </p>
       </div>
       <div className="left-info">
@@ -19,7 +20,7 @@ const ReviewItem = ({review}) => {
           {employee.skills &&
             employee.skills
               .map((skill, i) => <span key={i}>{skill.name}</span>)
-              .reduce((prev, curr) => [prev, ", ", curr])}
+              .reduce((prev, curr) => [prev, ", ", curr], null)}
         </p>
         <p><strong>Email:</strong> {employee.email}</p>
       </div>

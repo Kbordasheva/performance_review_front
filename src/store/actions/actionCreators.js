@@ -86,6 +86,33 @@ const reviewListUpdate = (data) => {
     };
 };
 
+const profileDetailsLoaded = (data) => {
+    return {
+        type: types.PROFILE_DETAILS_LOADED,
+        payload: {
+            profile: data,
+        },
+    };
+};
+
+const profileDetailsUpdated = (data) => {
+    return {
+        type: types.PROFILE_DETAILS_UPDATED,
+        payload: {
+            profile: data,
+        },
+    };
+};
+
+const profileDetailsError = () => {
+    return {
+        type: types.PROFILE_DETAILS_ERROR,
+        payload: {
+            profile: null,
+        },
+    };
+};
+
 const logger = {
     loginStart,
     loginSuccess,
@@ -94,7 +121,10 @@ const logger = {
     reviewListLoaded,
     reviewListUpdated,
     reviewListError,
-    reviewListUpdate
+    reviewListUpdate,
+    profileDetailsLoaded,
+    profileDetailsUpdated,
+    profileDetailsError
 }
 
 export default logger
