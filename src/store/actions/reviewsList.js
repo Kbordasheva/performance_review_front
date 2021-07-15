@@ -9,7 +9,7 @@ export const getReviewsList = (nextLink) => {
     const link = nextLink?.slice(nextLink.indexOf('?'), nextLink.length);
     const params = queryString.parse(link);
 
-    axios.get(`/api/v1/reviews/`, {params})
+    axios.get(`/api/v1/employees/`, {params})
       .then(response => {
         dispatch(actionCreators.reviewListUpdated(response.data));
       })

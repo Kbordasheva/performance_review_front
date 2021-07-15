@@ -35,8 +35,8 @@ const ReviewList = () => {
             className="ReviewList"
           >
             {
-              reviews.map((review) => {
-                return <ReviewItem review={review} key={review.id} />;
+              reviews.map((employee) => {
+                return <ReviewItem employee={employee} key={employee.id} />;
               })
             }
           </InfiniteScroll>

@@ -3,7 +3,7 @@ import axios from "../../axios";
 
 export const getProfileDetails = (id) => {
     return dispatch => {
-        axios.get(`/api/v1/reviews/${id}/`)
+        axios.get(`/api/v1/employees/profile/${id}/`)
             .then(response => {
                 dispatch(actionCreators.profileDetailsLoaded(response.data));
             })

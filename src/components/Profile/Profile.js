@@ -18,7 +18,7 @@ const Profile = ({match}) => {
   if (!profile) {
         return <h1 className="no-data">Profile not found!</h1>;
     } else {
-        genInfo = profile.employee;
+        genInfo = profile;
     }
 
   return (
@@ -45,6 +45,9 @@ const Profile = ({match}) => {
                     manager={genInfo.unit.manager}
                     skills={genInfo.skills}
                 />
+            </div>
+            <div className="block">
+
             </div>
         </section>
     );

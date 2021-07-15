@@ -1,14 +1,13 @@
 import "./ReviewItem.scss"
 import { Link } from "react-router-dom";
 
-const ReviewItem = ({review}) => {
-  const employee = review.employee;
+const ReviewItem = ({employee}) => {
 
   return (
     <article className="ReviewItem">
       <div className="info-name">
         <p className="ReviewItem__name">
-          <Link to={'/profile/' + review.id}>{employee.fullName}</Link>
+          <Link to={'/profile/' + employee.id}>{employee.fullName}</Link>
         </p>
       </div>
       <div className="left-info">
@@ -26,7 +25,7 @@ const ReviewItem = ({review}) => {
       </div>
       <div className="right-info">
         <div className="point">Progress:</div>
-        <div>{review.goalsDoneCount} goals done out of {review.goalsCount}</div>
+        <div>{employee.goalsDoneCount} goals done out of {employee.goalsCount}</div>
       </div>
     </article>
   );
