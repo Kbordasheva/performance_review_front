@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { getProfileDetails } from "../../store/actions/profileDetails";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import "./Profile.scss"
+import PerformanceReview from "./PerformanceReview/PerformanceReview";
 
 const Profile = ({match}) => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const Profile = ({match}) => {
                 />
             </div>
             <div className="block">
-
+                <PerformanceReview reviews={profile.review}/>
             </div>
         </section>
     );
