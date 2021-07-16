@@ -12,7 +12,7 @@ const ReviewDetailsItem = (props) => {
         review.goals.map(goal => {
             return <Goal key={goal.id} goal={goal}/>
           }))
-        : <h4>Goals was not set</h4>
+        : <h4>Goals are not set</h4>
       }
     </div>
   );

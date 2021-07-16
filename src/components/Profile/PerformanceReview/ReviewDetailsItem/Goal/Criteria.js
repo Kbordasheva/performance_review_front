@@ -1,40 +1,47 @@
 import React from "react";
 import { Form, getFormElement, SubmitButton } from "../../../../Shared/Form/FormElements";
-import Criteria from "./Criteria";
 
 export const formSchema = [
     {
       fieldName: "text",
       type: "TextInput",
-      label: "Goal",
+      label: "Criteria",
     },
     {
       fieldName: "isDone",
       type: "Checkbox",
       label: "Done",
     },
-    // {
-    //   fieldName: "criteria",
-    //   type: "TimeField",
-    //   label: "Criteria",
-    // },
+    {
+      fieldName: "startDate",
+      type: "DatePicker",
+      label: "Start Date",
+    },
+    {
+      fieldName: "deadline",
+      type: "DatePicker",
+      label: "Deadline",
+    },
+    {
+      fieldName: "finishDate",
+      type: "DatePicker",
+      label: "Finish Date",
+    },
 ];
 
+const Criteria = (props) => {
 
-
-const Goal = (props) => {
-
-  const { goal } = props;
+  const { criteria } = props;
 
   const onSubmit = (values, {setSubmitting, resetForm, setStatus}) => {
     console.log("Submit")
   }
 
   return (
-    <div className="goal">
+    <div className="criteria">
             <Form
                 enableReinitialize
-                initialValues={goal}
+                initialValues={criteria}
                 onSubmit={onSubmit}
             >
                 {formSchema.map(field => (
@@ -44,14 +51,8 @@ const Goal = (props) => {
                 ))}
                 <SubmitButton title="Submit"/>
             </Form>
-            { goal.criteria.length ? (
-              goal.criteria.map(criteria => {
-                  return <Criteria key={criteria.id} criteria={criteria}/>
-          }))
-        : <h4>Criteria are not set</h4>
-      }
     </div>
   )
 }
 
-export default Goal;
+export default Criteria;

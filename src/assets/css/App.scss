@@ -78,3 +78,49 @@ a, .link:visited {
 
   font-size: 18px;
 }
+
+.custom-checkbox {
+  &.custom-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 12px;
+  }
+  .custom-checkbox__label {
+    display: inline-flex;
+    margin: 0;
+    cursor: pointer;
+    transition: all .1s ease;
+    &:hover {
+      opacity: .8;
+      span::after{
+        background-color: #ff0000;
+      }
+    }
+  }
+  .custom-checkbox__label span {
+    background-image: url("../img/Checkbox_empty.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 18px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    justify-content: center;
+    margin-right: 10px;
+    &::after {
+      content: '';
+      height: 10px;
+      width: 10px;
+      background-color: transparent;
+      transition: all .2s ease;
+    }
+  }
+  .custom-control-input:checked~.custom-checkbox__label span::after {
+    background-color: #ff0000;
+  }
+
+}
