@@ -10,7 +10,7 @@ const ReviewDetailsItem = (props) => {
       <h3>{review.year}</h3>
       { review.goals.length ? (
         review.goals.map(goal => {
-            return <Goal key={goal.id} goal={goal}/>
+            return <Goal key={goal.id} goal={goal} review_id={review_id}/>
           }))
         : <h4>Goals are not set</h4>
       }

@@ -1,6 +1,8 @@
 import React from "react";
 import { Form, getFormElement, SubmitButton } from "../../../../Shared/Form/FormElements";
 import Criteria from "./Criteria";
+import { useDispatch } from "react-redux";
+import { editGoal } from "../../../../../store/actions/profileDetails";
 
 export const formSchema = [
     {
@@ -13,21 +15,23 @@ export const formSchema = [
       type: "Checkbox",
       label: "Done",
     },
-    // {
-    //   fieldName: "criteria",
-    //   type: "TimeField",
-    //   label: "Criteria",
-    // },
+    {
+      fieldName: "comments",
+      type: "NoteField",
+      label: "Comments",
+    },
 ];
 
 
 
 const Goal = (props) => {
+  const dispatch = useDispatch();
 
-  const { goal } = props;
+  const { goal, review_id } = props;
 
   const onSubmit = (values, {setSubmitting, resetForm, setStatus}) => {
-    console.log("Submit")
+    dispatch(editGoal(review_id, goal.id, values));
+    setSubmitting(false);
   }
 
   return (

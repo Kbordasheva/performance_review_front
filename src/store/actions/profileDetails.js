@@ -45,3 +45,16 @@ export const setEmployeeSkill = (id, skills) => async dispatch => {
         console.error(error);
     }
 };
+
+export const editGoal = (review_id, goal_id, data) => {
+    return dispatch => {
+        axios.put(`/api/v1/reviews/${review_id}/goals/${goal_id}/`, data)
+            .then(response => {
+                dispatch(actionCreators.goalUpdated(response.data));
+            })
+            .catch(error => {
+                console.error(error);
+                dispatch(actionCreators.profileDetailsError());
+            });
+    };
+}
