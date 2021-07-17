@@ -1,6 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
 import ReactTooltip from "react-tooltip";
+import notesImg from "../../../assets/img/note.svg";
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -400,7 +401,7 @@ const NoteField = (props) => {
                                                 name={`${fieldName}.${index}.text`}
                                                 id={`${fieldName}.${index}.text`}
                                                 placeholder={placeholder || ''}
-                                                disabled={!(user?.internalId === value?.authorId) && !isNaN(value?.id)}
+                                                disabled={!(user?.id === value?.authorId) && !isNaN(value?.id)}
                                             />
                                         </div>)
                                 }
@@ -425,6 +426,7 @@ const NoteField = (props) => {
                             }
                             <div></div>
                             <button type="button" className="tooltip-button" data-tip="Add notes">
+                              <img data-tooltip="Add notes" src={notesImg} alt={"notes"} onClick={() => push("")} />
                             </button>
                             <ReactTooltip place="top" type="dark" effect="solid"/>
                         </div>
