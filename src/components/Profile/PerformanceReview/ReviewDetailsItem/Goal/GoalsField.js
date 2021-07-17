@@ -2,16 +2,16 @@ import { getFormElement } from "../../../../Shared/Form/FormElements";
 
 const formSchema = [
     {
+      fieldName: "isDone",
+      type: "Checkbox",
+      label: "Done",
+    },
+    {
       fieldName: "text",
       type: "TextInput",
       label: "Goal",
     },
     {
-      fieldName: "isDone",
-      type: "Checkbox",
-      label: "Done",
-    },
-      {
       fieldName: "criteria",
       type: "CriteriaField",
       label: "Criteria",
@@ -29,7 +29,7 @@ const GoalsField = (props) => {
   return (
     <div className="goals-container" key={formIndex}>
       {formSchema.map((field, index) => (
-        <div key={index}>
+        <div className={field.type} key={index}>
           {getFormElement(
             field.type,
             {

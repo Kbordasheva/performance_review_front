@@ -53,7 +53,7 @@ const TextField = (props) => {
             <Field
                 className={classNames(
                     "form-control",
-                    name === "additionalDocuments"
+                    name === "text"
                       ? "col-md-7"
                       : name === "address"
                       ? "col-md-5"
@@ -78,7 +78,13 @@ const DateField = (props) => {
 
     return (
         <div className="form-group">
-            {label && <label className="control-label col-md-2" htmlFor={fieldName}>{label}:</label>}
+            {label && <label className={classNames(
+                                  "control-label",
+                                  name === "birthDate"
+                                    ? "col-md-2"
+                                    : ""
+                                )}
+                             htmlFor={fieldName}>{label}:</label>}
             <DatePicker
                 selected={initDate}
                 onChange={date => setValue(moment(date).format('MM/DD/YYYY'))}
@@ -318,7 +324,7 @@ const Checkbox = (props) => {
     }
     return (
         <div className="form-group">
-        <label className="control-label col-md-4"
+        <label className="control-label"
                htmlFor={fieldName}>{label}</label>
         <div className="custom-control custom-checkbox option-inline">
              <Field
@@ -337,31 +343,6 @@ const Checkbox = (props) => {
             render={msg => <div style={{color: "red"}}>{msg}</div>}
         />
     </div>
-    )
-};
-const Currency = (props) => {
-    const {name, label, options, formIndex, nameFieldArray} = props;
-    const fieldName = formIndex >= 0 ?  `${nameFieldArray}.${formIndex}.${name}`: `${name}`
-    return (
-        <div className="form-group">
-            {label && <label className="control-label col-md-2" htmlFor={fieldName}>{label}:</label>}
-            <Field
-                className="form-control col-md-1"
-                as="select"
-                id={fieldName}
-                name={fieldName}
-            >
-                {options.map((opt, index) =>
-                    <option value={opt.value} key={index} label={opt.text}/>)}
-            </Field>
-            <Field
-                className="form-control col-md-2"
-                type="text"
-                id={fieldName + "-amount"}
-                name={formIndex >= 0 ? `${nameFieldArray}.${formIndex}.ticketCost` : "salaryAfterRelocation"}
-            />
-            <ErrorMessage name={fieldName} render={msg => <div style={{color: "red"}}>{msg}</div>}/>
-        </div>
     )
 };
 
@@ -437,54 +418,6 @@ const NoteField = (props) => {
     );
 };
 
-const PhoneField = (props) => {
-    const {name, label} = props;
-    const [field] = useField(props);
-    return (
-        <div className="form-group">
-            <label className="control-label col-sm-2" htmlFor={name}>{label}:</label>
-            <FieldArray name={name}>
-                {({insert, remove, push}) => (
-                    <div className="field-array col-sm-5">
-                        {field.value.length > 0 &&
-                        field.value.map((phone, index) => (
-                            <div key={index}>
-                                <Field
-                                    name={`${name}.${index}`}
-                                    className="form-control"
-                                    placeholder="+XXX XX XXXXXXX"
-                                    type="text"
-                                />
-                                <button
-                                    type="button"
-                                    className="btn btn-control"
-                                    onClick={() => insert(index + 1, "")}
-                                    title="Add phone number"
-                                >
-                                    +
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn btn-control"
-                                    onClick={() => remove(index)}
-                                    title="Remove phone number"
-                                >
-                                    -
-                                </button>
-                                <ErrorMessage
-                                    name={`${name}.${index}`}
-                                    className="field-error"
-                                    render={msg => <div style={{color: "red"}}>{msg}</div>}
-                                />
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </FieldArray>
-        </div>
-    )
-};
-
 const CriteriaField = (props) => {
     const {name, label, formIndex, nameFieldArray} = props;
     const fieldName = formIndex >= 0 ? `${nameFieldArray}.${formIndex}.${name}` : `${name}`;
@@ -499,17 +432,19 @@ const CriteriaField = (props) => {
     return (
         <FieldArray name={fieldName}>
             {({insert, remove, push}) => (
-                <div className="">
+                <div className="criteria-container">
                     {field.value.map((value, index) => (
-                        <div className="" key={index}>
+                        <div className="criteria-info" key={index}>
                             <div className="form-group">
-                                <label className="control-label col-md-2"
+                                <label className="control-label"
                                        htmlFor={`${fieldName}.${index}.text`}>{label}:</label>
-                                <Field
-                                    name={`${fieldName}.${index}.text`}
-                                    className="form-control col-md-5"
-                                    type="text"
-                                />
+                                            <Field
+                                                className="form-control criteria-field"
+                                                as="textarea"
+                                                name={`${fieldName}.${index}.text`}
+                                                id={fieldName}
+                                                placeholder=""
+                                            />
                                 <ErrorMessage
                                     name={`${fieldName}.${index}.text`}
                                     className="field-error"
@@ -584,10 +519,6 @@ export const getFormElement = (type, field, formikProps) => {
             return <Checkbox {...props} />
         case "TextArea":
             return <Textarea {...props} />
-        case "Currency":
-            return <Currency {...props} />
-        case "PhoneField":
-            return <PhoneField {...props} />
         case "CriteriaField":
             return <CriteriaField {...props} />
         case "ReactSelect":

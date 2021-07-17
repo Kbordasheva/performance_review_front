@@ -16,7 +16,7 @@
   }
 
   .option-inline {
-    display: inline-block;
+    display: block;
     margin-right: 20px;
   }
 
@@ -132,5 +132,25 @@
     display: inline;
     margin: 0;
     padding: 0;
+  }
+}
+
+.criteria-info {
+  display: flex;
+  justify-content: space-between;
+
+  .react-datepicker-wrapper {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+  .react-datepicker__input-container {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+  }
+  .criteria-field{
+    width: 1000px;
+    min-height: 100px;
   }
 }

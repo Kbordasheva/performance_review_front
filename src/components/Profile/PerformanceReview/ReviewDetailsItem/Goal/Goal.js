@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { getValuesToUpdate } from "../../../../../helpers";
 import GoalsField from "./GoalsField";
 import { addAllGoals, editAllGoals } from "../../../../../store/actions/profileDetails";
+import "./Goal.scss"
 
 const goalInitialValues = {
   text: "",
