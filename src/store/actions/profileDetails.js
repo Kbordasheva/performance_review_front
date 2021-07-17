@@ -55,6 +55,15 @@ export const editGoal = async (review_id, goal_id, data) => {
     }
 };
 
+export const addGoal = async (id, data) => {
+    try {
+        const response = await axios.post(`/api/v1/reviews/${id}/goals/`, data);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 export const editComments = async (reviewId, goalId, commentId, info) => {
     try {
         const response = await axios.put(`/api/v1/reviews/${reviewId}/goals/${goalId}/comments/${commentId}/`, info);
@@ -96,6 +105,30 @@ export const editAllGoals = (goals, reviewId) => {
         return Promise.all(goalsPromises).then((responses) => {
             responses.forEach((goalsInfo) => {
                 dispatch(actionCreators.goalUpdate(goalsInfo));
+            })
+        })
+    }
+}
+
+export const addAllGoals = (goals, reviewId) => {
+    return dispatch => {
+        const goalsPromises = goals.map((item) => {
+            return addGoal(reviewId, {
+                ...item,
+            })
+                .then(async (response) => {
+                    const commentsPromise = item.comments.map((comment) => {
+                        if (comment) {
+                            return  addComments(response.id, {...comment})
+                        }
+                        else return null
+                    });
+                    return { ...response, notes: await Promise.all(commentsPromise) }
+                })
+        })
+        return Promise.all(goalsPromises).then((responses) => {
+            responses.forEach((item) => {
+                dispatch(actionCreators.goalAdd(item));
             })
         })
     }

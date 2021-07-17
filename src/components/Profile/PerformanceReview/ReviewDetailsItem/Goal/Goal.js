@@ -4,7 +4,7 @@ import { Formik, Form, FieldArray } from "formik";
 import { useDispatch } from "react-redux";
 import { getValuesToUpdate } from "../../../../../helpers";
 import GoalsField from "./GoalsField";
-import { editAllGoals } from "../../../../../store/actions/profileDetails";
+import { addAllGoals, editAllGoals } from "../../../../../store/actions/profileDetails";
 
 const goalInitialValues = {
   text: "",
@@ -48,7 +48,7 @@ const Goal = (props) => {
         dispatch(editAllGoals(valuesToUpdate, reviewId))
       }
       if (valuesToAdd.length) {
-        // dispatch(addAllAccommodationDetails(valuesToAdd, reviewId))
+        dispatch(addAllGoals(valuesToAdd, reviewId))
       }
     }
     finally {

@@ -142,6 +142,15 @@ const goalUpdate = (data) => {
     };
 };
 
+const goalAdd = (data) => {
+        return {
+        type: types.GOAL_ADD,
+        payload: {
+            goal: data,
+        },
+    };
+}
+
 const logger = {
     loginStart,
     loginSuccess,
@@ -156,7 +165,8 @@ const logger = {
     profileDetailsError,
     generalInfoUpdated,
     skillsLoad,
-    goalUpdate
+    goalUpdate,
+    goalAdd,
 }
 
 export default logger
