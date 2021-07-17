@@ -17,6 +17,8 @@ const goalInitialValues = {
 const comparisonFields = [
   "text",
   "isDone",
+  "criteria",
+  "comments"
 ];
 
 const Goal = (props) => {
@@ -53,12 +55,10 @@ const Goal = (props) => {
       setSubmitting(false);
     }
 
-    // dispatch(editGoal(review_id, goal.id, values));
-    // setSubmitting(false);
   }
 
   return (
-    <div className="accommodation-details">
+    <div className="goals-info">
             <Formik
               enableReinitialize
               initialValues={initialValues}

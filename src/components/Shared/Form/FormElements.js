@@ -425,7 +425,6 @@ const NoteField = (props) => {
                             }
                             <div></div>
                             <button type="button" className="tooltip-button" data-tip="Add notes">
-                                {/*<img data-tooltip="Add notes" src={notesImg} alt={"notes"} onClick={() => push("")} />*/}
                             </button>
                             <ReactTooltip place="top" type="dark" effect="solid"/>
                         </div>
@@ -484,89 +483,53 @@ const PhoneField = (props) => {
     )
 };
 
-const AddressField = (props) => {
-    const {name, label, formikProps} = props;
-    const [field] = useField(props);
+const CriteriaField = (props) => {
+    const {name, label, formIndex, nameFieldArray} = props;
+    const fieldName = formIndex >= 0 ? `${nameFieldArray}.${formIndex}.${name}` : `${name}`;
+    const [field] = useField(fieldName);
 
-    const setIsCurrentAddress = (e, formIndex) => {
-        const value = e.target.checked;
-        formikProps.setFieldValue(`${name}.${formIndex}.isCurrent`, value);
-
-        if (value) {
-            if (formIndex >= 0) {
-                formikProps.values.addressInfo.forEach((item, index) => {
-                    if (index !== formIndex) {
-                        formikProps.setFieldValue(
-                            `${name}.${index}.isCurrent`,
-                            false
-                        );
-                    }
-                });
-            }
-        }
-    }
 
     const handleClick = (push) => {
-        push({address: '', startDate: '', endDate: '', isCurrent: true});
+        push({text: '', isDone: false, startDate: '', deadline: '', finishDate: ''});
 
-        formikProps.values.addressInfo.forEach((item, index) => {
-            if (index !== formikProps.values.addressInfo.length) {
-                formikProps.setFieldValue(
-                    `${name}.${index}.isCurrent`,
-                    false
-                );
-            }
-        });
     }
 
     return (
-        <FieldArray name={name}>
+        <FieldArray name={fieldName}>
             {({insert, remove, push}) => (
                 <div className="">
-                    {field.value.map((addr, index) => (
+                    {field.value.map((value, index) => (
                         <div className="" key={index}>
                             <div className="form-group">
                                 <label className="control-label col-md-2"
-                                       htmlFor={`${name}.${index}.address`}>{label}:</label>
+                                       htmlFor={`${fieldName}.${index}.text`}>{label}:</label>
                                 <Field
-                                    name={`${name}.${index}.address`}
+                                    name={`${fieldName}.${index}.text`}
                                     className="form-control col-md-5"
                                     type="text"
                                 />
                                 <ErrorMessage
-                                    name={`${name}.${index}.address`}
+                                    name={`${fieldName}.${index}.text`}
                                     className="field-error"
                                     render={msg => <div style={{color: "red"}}>{msg}</div>}
                                 />
                             </div>
-                            <DateField
-                                name={`${name}.${index}.startDate`}
-                                label={"Start date"}
+                            <Checkbox
+                                name={`${fieldName}.${index}.isDone`}
+                                label={"Done"}
                             />
                             <DateField
-                                name={`${name}.${index}.endDate`}
-                                label={"End date"}
+                                name={`${fieldName}.${index}.startDate`}
+                                label={"Start Date"}
                             />
-                            <div className="form-group">
-                                <label className="control-label col-md-2"
-                                       htmlFor={`${name}.${index}.isCurrent`}>Is current:</label>
-                                <div className="custom-control custom-checkbox option-inline">
-                                    <Field
-                                        name={`${name}.${index}.isCurrent`}
-                                        className="custom-control-input"
-                                        type="checkbox"
-                                        id={`addr.${index}.isCurrent`}
-                                        onChange={(e) => setIsCurrentAddress(e, index)}
-                                    />
-                                    <label className="custom-checkbox__label"
-                                           htmlFor={`addr.${index}.isCurrent`}><span></span></label>
-                                </div>
-                                <ErrorMessage
-                                    name={`${name}.${index}.isCurrent`}
-                                    className="field-error"
-                                    render={msg => <div style={{color: "red"}}>{msg}</div>}
-                                />
-                            </div>
+                            <DateField
+                                name={`${fieldName}.${index}.deadline`}
+                                label={"Deadline"}
+                            />
+                            <DateField
+                                name={`${fieldName}.${index}.finishDate`}
+                                label={"Finish Date"}
+                            />
                         </div>
                     ))}
                     <button
@@ -576,7 +539,7 @@ const AddressField = (props) => {
                             handleClick(push);
                         }}
                     >
-                        Add Address
+                        Add Criteria
                     </button>
                 </div>
             )}
@@ -622,8 +585,8 @@ export const getFormElement = (type, field, formikProps) => {
             return <Currency {...props} />
         case "PhoneField":
             return <PhoneField {...props} />
-        case "AddressField":
-            return <AddressField {...props} />
+        case "CriteriaField":
+            return <CriteriaField {...props} />
         case "ReactSelect":
             return <ReactSelect {...props} />
         case "CustomSelect":

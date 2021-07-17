@@ -11,6 +11,11 @@ const formSchema = [
       type: "Checkbox",
       label: "Done",
     },
+      {
+      fieldName: "criteria",
+      type: "CriteriaField",
+      label: "Criteria",
+    },
     {
       fieldName: "comments",
       type: "NoteField",
