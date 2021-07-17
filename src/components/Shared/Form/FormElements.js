@@ -534,6 +534,7 @@ const CriteriaField = (props) => {
                             />
                         </div>
                     ))}
+                    <SubmitButton title="Save criteria" />
                     <button
                         type="button"
                         className="button btn-form main-btn red"

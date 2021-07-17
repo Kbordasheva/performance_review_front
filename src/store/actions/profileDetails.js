@@ -82,6 +82,24 @@ export const addComments = async (reviewId, goalId, info) => {
     }
 };
 
+export const editCriteria = async (reviewId, goalId, criteriaId, info) => {
+    try {
+        const response = await axios.put(`/api/v1/reviews/${reviewId}/goals/${goalId}/criteria/${criteriaId}/`, info);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const addCriteria = async (reviewId, goalId, info) => {
+    try {
+        const response = await axios.post(`/api/v1/reviews/${reviewId}/goals/${goalId}/criteria/`, info);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 export const editAllGoals = (goals, reviewId) => {
     return dispatch => {
         const goalsPromises = goals.map((item) => {
@@ -99,7 +117,19 @@ export const editAllGoals = (goals, reviewId) => {
                         }
                         else return null
                     });
-                    return { ...response, notes: await Promise.all(commentsPromise) }
+                    const criteriaPromise = item.criteria.map((criteria) => {
+                        if (criteria) {
+                            if (criteria.id) {
+                                return editCriteria(reviewId, item.id, criteria.id, { ...criteria });
+                            } else {
+                                return addCriteria(reviewId, item.id, { ...criteria });
+                            }
+                        }
+                        else return null
+                    });
+                    return { ...response,
+                        comments: await Promise.all(commentsPromise),
+                        criteria: await Promise.all(criteriaPromise)}
                 })
         })
         return Promise.all(goalsPromises).then((responses) => {
@@ -119,11 +149,19 @@ export const addAllGoals = (goals, reviewId) => {
                 .then(async (response) => {
                     const commentsPromise = item.comments.map((comment) => {
                         if (comment) {
-                            return  addComments(response.id, {...comment})
+                            return addComments(reviewId, response.id, {...comment});
                         }
                         else return null
                     });
-                    return { ...response, notes: await Promise.all(commentsPromise) }
+                    const criteriaPromise = item.criteria.map((criteria) => {
+                        if (criteria) {
+                            return addCriteria(reviewId, response.id, {...criteria});
+                        }
+                        else return null
+                    });
+                    return { ...response,
+                        comments: await Promise.all(commentsPromise),
+                        criteria: await Promise.all(criteriaPromise)}
                 })
         })
         return Promise.all(goalsPromises).then((responses) => {
