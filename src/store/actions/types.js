@@ -17,6 +17,6 @@ export const types = {
 
     SKILLS_LOAD: "SKILLS_LOAD",
 
-    GOAL_UPDATED: "GOAL_UPDATED",
+    GOAL_UPDATE: "GOAL_UPDATE",
 
 };

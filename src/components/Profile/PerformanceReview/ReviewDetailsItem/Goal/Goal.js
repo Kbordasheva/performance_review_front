@@ -1,61 +1,108 @@
 import React from "react";
-import { Form, getFormElement, SubmitButton } from "../../../../Shared/Form/FormElements";
-import Criteria from "./Criteria";
+import { SubmitButton } from "../../../../Shared/Form/FormElements";
+import { Formik, Form, FieldArray } from "formik";
 import { useDispatch } from "react-redux";
-import { editGoal } from "../../../../../store/actions/profileDetails";
+import { getValuesToUpdate } from "../../../../../helpers";
+import GoalsField from "./GoalsField";
+import { editAllGoals } from "../../../../../store/actions/profileDetails";
 
-export const formSchema = [
-    {
-      fieldName: "text",
-      type: "TextInput",
-      label: "Goal",
-    },
-    {
-      fieldName: "isDone",
-      type: "Checkbox",
-      label: "Done",
-    },
-    {
-      fieldName: "comments",
-      type: "NoteField",
-      label: "Comments",
-    },
+const goalInitialValues = {
+  text: "",
+  isDone: false,
+  criteria: [],
+  comments: [],
+
+};
+
+const comparisonFields = [
+  "text",
+  "isDone",
 ];
-
-
 
 const Goal = (props) => {
   const dispatch = useDispatch();
 
-  const { goal, review_id } = props;
+  const { reviewId, goalsInfo } = props;
+
+    const initialValues = {
+    goalsInfo: goalsInfo.length
+      ? goalsInfo
+      : [goalInitialValues],
+  };
 
   const onSubmit = (values, {setSubmitting, resetForm, setStatus}) => {
-    dispatch(editGoal(review_id, goal.id, values));
-    setSubmitting(false);
+    const valuesInfo = [...values?.goalsInfo];
+
+    const valuesToUpdate = getValuesToUpdate(
+      valuesInfo,
+      goalsInfo,
+      comparisonFields
+    );
+
+    const valuesToAdd = valuesInfo.filter(({ id }) => isNaN(id));
+
+    try {
+      if (valuesToUpdate.length) {
+        dispatch(editAllGoals(valuesToUpdate, reviewId))
+      }
+      if (valuesToAdd.length) {
+        // dispatch(addAllAccommodationDetails(valuesToAdd, reviewId))
+      }
+    }
+    finally {
+      setSubmitting(false);
+    }
+
+    // dispatch(editGoal(review_id, goal.id, values));
+    // setSubmitting(false);
   }
 
   return (
-    <div className="goal">
-            <Form
-                enableReinitialize
-                initialValues={goal}
-                onSubmit={onSubmit}
-            >
-                {formSchema.map(field => (
-                    <div key={field.fieldName}>
-                        {getFormElement(field.type, field)}
-                    </div>
-                ))}
-                <SubmitButton title="Submit"/>
-            </Form>
-            { goal.criteria.length ? (
-              goal.criteria.map(criteria => {
-                  return <Criteria key={criteria.id} criteria={criteria}/>
-          }))
-        : <h4>Criteria are not set</h4>
-      }
+    <div className="accommodation-details">
+            <Formik
+              enableReinitialize
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              render={(formikProps) => {
+                return (
+                  <Form>
+                    <FieldArray
+                      name="goalsInfo"
+                      render={({ remove, push }) => (
+                        <>
+                          <div>
+                            {formikProps.values.goalsInfo.length > 0 &&
+                              formikProps.values.goalsInfo.map(
+                                (goalsInfo, formIndex) => (
+                                  <GoalsField
+                                  formikProps={formikProps}
+                                  formIndex={formIndex}
+                                />
+                                )
+                              )}
+                          </div>
+                          <div className="button-wrapper">
+                            <SubmitButton title="Submit" />
+
+                            <button
+                              type="button"
+                              className="button btn-form main-btn red"
+                              onClick={() =>
+                                push(goalInitialValues)
+                              }
+                            >
+                              Add goal
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    />
+                  </Form>
+                );
+              }}
+            />
     </div>
-  )
-}
+  );
+};
 
 export default Goal;

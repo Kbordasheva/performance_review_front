@@ -133,9 +133,9 @@ const skillsLoad = (data) => {
     };
 }
 
-const goalUpdated = (data) => {
+const goalUpdate = (data) => {
     return {
-        type: types.GOAL_UPDATED,
+        type: types.GOAL_UPDATE,
         payload: {
             goal: data,
         },
@@ -156,7 +156,7 @@ const logger = {
     profileDetailsError,
     generalInfoUpdated,
     skillsLoad,
-    goalUpdated
+    goalUpdate
 }
 
 export default logger
