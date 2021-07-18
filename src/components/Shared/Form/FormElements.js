@@ -347,74 +347,82 @@ const Checkbox = (props) => {
     )
 };
 
-const NoteField = (props) => {
-    const {name, label, placeholder,formikProps, formIndex, nameFieldArray} = props;
+const CommentField = (props) => {
+    const {name, placeholder,formikProps, formIndex, nameFieldArray} = props;
     const fieldName = formIndex >= 0 ? `${nameFieldArray}.${formIndex}.${name}` : `${name}`;
     const [field] = useField(fieldName);
 
     const user = useSelector((state) => state.auth.user);
+    const [isFormVisible, setIsFormVisible] = useState(false)
 
+    const toggle = () => {
+      setIsFormVisible(!isFormVisible)
+}
     return (
         <div className="form-group textarea-group column">
-            {field.value.length > 0 && (
-                <label className="control-label col-md-2" htmlFor={`${fieldName}`}>
-                    {label}:
-                </label>
-            )}
-            <FieldArray name={fieldName}>
-                {({insert, remove, push}) => (
-                    <>
-                        <>
-                            {field.value.length > 0 &&
-                                field.value.map((value, index) => {
-                                    const createdAt = value?.createdAt?.slice(0, 16);
-                                    const updatedAt = value?.updatedAt?.slice(0, 16);
-                                    const createdDate = new Date(createdAt);
-                                    const updatedDate = new Date(updatedAt)
-                                    const labelNote =  (createdAt === updatedAt) ?
-                                        `${(moment(createdDate).format('L') + ' ' + value?.author + ' ' + 'wrote:')}` :
-                                        `${(moment(updatedDate).format('L') + ' ' + value?.author + '(edit) ' + 'wrote:')}`
-                                    return (
-                                        <div className="note" key={index}>
-                                            {value?.author && <p> {labelNote}</p>}
-                                            <Field
-                                                className="form-control col-md-6"
-                                                as="textarea"
-                                                name={`${fieldName}.${index}.text`}
-                                                id={`${fieldName}.${index}.text`}
-                                                placeholder={placeholder || ''}
-                                                disabled={!(user?.id === value?.authorId) && !isNaN(value?.id)}
-                                            />
-                                        </div>)
-                                }
-                                )}
-                        </>
 
-                        <div className="notes">
-                            {field.value.length > 0 &&
-                                <div className="notes-buttons">
-                                    <SubmitButton title="Save notes" />
-                                    <button
-                                    type="button"
-                                    className="button btn-form main-btn red"
-                                    onClick={(event) => {
-                                        event.preventDefault();
-                                        formikProps?.handleReset();
-                                    }}
-                                    >
-                                    Canсel
-                                    </button>
-                                </div>
-                            }
-                            <div></div>
-                            <button type="button" className="tooltip-button" data-tip="Add notes">
-                              <img data-tooltip="Add notes" src={notesImg} alt={"notes"} onClick={() => push("")} />
-                            </button>
-                            <ReactTooltip place="top" type="dark" effect="solid"/>
-                        </div>
-                    </>
-                )}
-            </FieldArray>
+            <CheckboxHelp setIsFormVisible={toggle} title="Comments"/>
+          {isFormVisible &&
+          <FieldArray name={fieldName}>
+            {({insert, remove, push}) => (
+              <div className="comments-container">
+              <>
+                <>
+
+                  {field.value.length > 0 &&
+                  field.value.map((value, index) => {
+                      const createdAt = value?.createdAt?.slice(0, 16);
+                      const updatedAt = value?.updatedAt?.slice(0, 16);
+                      const createdDate = new Date(createdAt);
+                      const updatedDate = new Date(updatedAt)
+                      const labelNote = (createdAt === updatedAt) ?
+                        `${(moment(createdDate).format('L') + ' ' + value?.author + ' ' + 'wrote:')}` :
+                        `${(moment(updatedDate).format('L') + ' ' + value?.author + '(edit) ' + 'wrote:')}`
+                      return (
+                        <div className="note" key={index}>
+                          {value?.author && <p> {labelNote}</p>}
+                          <Field
+                            className="form-control col-md-6"
+                            as="textarea"
+                            name={`${fieldName}.${index}.text`}
+                            id={`${fieldName}.${index}.text`}
+                            placeholder={placeholder || ''}
+                            disabled={!(user?.id === value?.authorId) && !isNaN(value?.id)}
+                          />
+                        </div>)
+                    }
+                  )}
+                </>
+
+                <div className="notes">
+                  {field.value.length > 0 &&
+                  <div className="notes-buttons">
+                    <SubmitButton title="Save notes"/>
+                    <button
+                      type="button"
+                      className="button btn-form main-btn red"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        formikProps?.handleReset();
+                      }}
+                    >
+                      Canсel
+                    </button>
+                  </div>
+                  }
+                  <button
+                    type="button"
+                    className="button btn-form main-btn add-comment"
+                    onClick={() => push("")}
+                  >
+                    Add comment
+                  </button>
+                </div>
+              </>
+              </div>
+            )}
+          </FieldArray>
+          }
         </div>
     );
 };
@@ -539,8 +547,8 @@ export const getFormElement = (type, field, formikProps) => {
             return <ReactSelect {...props} />
         case "CustomSelect":
             return <CustomSelect {...props} />
-        case "NoteField":
-            return <NoteField {...props}/>
+        case "CommentField":
+            return <CommentField {...props}/>
         default:
             return false;
     }

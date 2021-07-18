@@ -18,7 +18,7 @@ const formSchema = [
     },
     {
       fieldName: "comments",
-      type: "NoteField",
+      type: "CommentField",
       label: "Comments",
     },
 ];

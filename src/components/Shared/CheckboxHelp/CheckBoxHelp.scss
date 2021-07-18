@@ -3,6 +3,7 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 30px;
+  margin-left: 30px;
 
   .section-icon {
     content: "";
@@ -38,7 +39,7 @@
     transition: all 0.2s ease;
   }
 
-  h3 {
+  .title {
     margin-bottom: 0;
     cursor: pointer;
   }

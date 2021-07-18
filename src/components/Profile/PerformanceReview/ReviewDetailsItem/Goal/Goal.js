@@ -83,7 +83,7 @@ const Goal = (props) => {
                               )}
                           </div>
                           <div className="button-wrapper">
-                            <SubmitButton title="Submit" />
+                            <SubmitButton title="Save" />
 
                             <button
                               type="button"
@@ -92,7 +92,7 @@ const Goal = (props) => {
                                 push(goalInitialValues)
                               }
                             >
-                              Add goal
+                              Add new goal
                             </button>
                           </div>
                         </>

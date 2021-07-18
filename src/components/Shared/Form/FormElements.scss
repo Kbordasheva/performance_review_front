@@ -103,9 +103,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 50%;
 
-  &-buttons {
+  &-buttons, .add-comment {
     margin-top: 1rem;
   }
 
@@ -153,7 +153,7 @@
     width: 1000px;
   }
 }
-.criteria-container {
+.criteria-container, .comments-container {
   margin-left: 50px;
 }
 
