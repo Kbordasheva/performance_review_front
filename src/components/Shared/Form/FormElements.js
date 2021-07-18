@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {useSelector} from "react-redux";
 import ReactTooltip from "react-tooltip";
 import notesImg from "../../../assets/img/note.svg";
@@ -17,6 +17,7 @@ import {
   useField,
   FieldArray,
 } from "formik";
+import CheckboxHelp from "../CheckboxHelp/CheckBoxHelp";
 
 export const Form = (props) => {
     return (
@@ -428,60 +429,73 @@ const CriteriaField = (props) => {
         push({text: '', isDone: false, startDate: '', deadline: '', finishDate: ''});
 
     }
+    const [isFormVisible, setIsFormVisible] = useState(false)
+
+    const toggle = () => {
+      setIsFormVisible(!isFormVisible)
+  }
 
     return (
+      <div>
+          <CheckboxHelp setIsFormVisible={toggle} title="Success criteria"/>
+        {isFormVisible &&
         <FieldArray name={fieldName}>
-            {({insert, remove, push}) => (
-                <div className="criteria-container">
-                    {field.value.map((value, index) => (
-                        <div className="criteria-info" key={index}>
-                            <div className="form-group">
-                                <label className="control-label"
-                                       htmlFor={`${fieldName}.${index}.text`}>{label}:</label>
-                                            <Field
-                                                className="form-control criteria-field"
-                                                as="textarea"
-                                                name={`${fieldName}.${index}.text`}
-                                                id={fieldName}
-                                                placeholder=""
-                                            />
-                                <ErrorMessage
-                                    name={`${fieldName}.${index}.text`}
-                                    className="field-error"
-                                    render={msg => <div style={{color: "red"}}>{msg}</div>}
-                                />
-                            </div>
-                            <Checkbox
-                                name={`${fieldName}.${index}.isDone`}
-                                label={"Done"}
-                            />
-                            <DateField
-                                name={`${fieldName}.${index}.startDate`}
-                                label={"Start Date"}
-                            />
-                            <DateField
-                                name={`${fieldName}.${index}.deadline`}
-                                label={"Deadline"}
-                            />
-                            <DateField
-                                name={`${fieldName}.${index}.finishDate`}
-                                label={"Finish Date"}
-                            />
-                        </div>
-                    ))}
-                    <SubmitButton title="Save criteria" />
-                    <button
-                        type="button"
-                        className="button btn-form main-btn red"
-                        onClick={() => {
-                            handleClick(push);
-                        }}
-                    >
-                        Add Criteria
-                    </button>
+
+          {({insert, remove, push}) => (
+            <div className="criteria-container">
+              {field.value.map((value, index) => (
+                <div className="criteria-info" key={index}>
+                  <Checkbox
+                    name={`${fieldName}.${index}.isDone`}
+                    label={"Done"}
+                  />
+                  <div className="form-group">
+                    <label className="control-label"
+                           htmlFor={`${fieldName}.${index}.text`}>{label}:</label>
+                    <Field
+                      className="form-control criteria-field"
+                      name={`${fieldName}.${index}.text`}
+                      type="text"
+                    />
+                    <ErrorMessage
+                      name={`${fieldName}.${index}.text`}
+                      className="field-error"
+                      render={msg => <div style={{color: "red"}}>{msg}</div>}
+                    />
+                  </div>
+                  <DateField
+                    name={`${fieldName}.${index}.startDate`}
+                    label={"Start Date"}
+                  />
+                  <DateField
+                    name={`${fieldName}.${index}.deadline`}
+                    label={"Deadline"}
+                  />
+                  <DateField
+                    name={`${fieldName}.${index}.finishDate`}
+                    label={"Finish Date"}
+                  />
+                  <SubmitButton className="button btn-form main-btn criteria-submit" title="Save"/>
                 </div>
-            )}
+              ))}
+
+
+              <button
+                type="button"
+                className="button btn-form main-btn red"
+                onClick={() => {
+                  handleClick(push);
+                }}
+              >
+                Add Criteria
+              </button>
+            </div>
+          )}
+
         </FieldArray>
+        }
+                            </div>
+
     )
 };
 

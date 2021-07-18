@@ -151,6 +151,16 @@
   }
   .criteria-field{
     width: 1000px;
-    min-height: 100px;
   }
+}
+.criteria-container {
+  margin-left: 50px;
+}
+
+.criteria-submit {
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 20px;
+  align-self: end;
+  margin-bottom: 1rem;
 }
