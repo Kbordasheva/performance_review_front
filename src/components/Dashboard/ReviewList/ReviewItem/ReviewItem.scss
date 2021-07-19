@@ -15,7 +15,9 @@
   .point {
     font-size: 18px;
     font-weight: 700;
+    align-self: center;
     margin-bottom: 1rem;
+
     strong {
       font-size: 18px;
     }
@@ -33,7 +35,8 @@
     padding: 0 15px;
     width: 50%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-content: center;
   }
 
   .ReviewItem__name a {
@@ -49,5 +52,19 @@
   .info-name {
     width: 100%;
     padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.progress-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  canvas {
+    height: 170px!important;
+    width: 170px!important;
   }
 }
