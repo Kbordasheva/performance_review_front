@@ -86,6 +86,71 @@ const reviewListUpdate = (data) => {
     };
 };
 
+const profileDetailsLoaded = (data) => {
+    return {
+        type: types.PROFILE_DETAILS_LOADED,
+        payload: {
+            profile: data,
+        },
+    };
+};
+
+const profileDetailsUpdated = (data) => {
+    return {
+        type: types.PROFILE_DETAILS_UPDATED,
+        payload: {
+            profile: data,
+        },
+    };
+};
+
+const profileDetailsError = () => {
+    return {
+        type: types.PROFILE_DETAILS_ERROR,
+        payload: {
+            profile: null,
+        },
+    };
+};
+
+const generalInfoUpdated = (data) => {
+    return {
+        type: types.GENERAL_INFO_UPDATED,
+        payload: {
+            generalInfo: data,
+        },
+    };
+};
+
+const skillsLoad = (data) => {
+    return {
+        type: types.SKILLS_LOAD,
+        payload: {
+            next: data.next,
+            skills: data.results,
+            previous: data.previous,
+        },
+    };
+}
+
+const goalUpdate = (data) => {
+    return {
+        type: types.GOAL_UPDATE,
+        payload: {
+            goal: data,
+        },
+    };
+};
+
+const goalAdd = (data) => {
+        return {
+        type: types.GOAL_ADD,
+        payload: {
+            goal: data,
+        },
+    };
+}
+
 const logger = {
     loginStart,
     loginSuccess,
@@ -94,7 +159,14 @@ const logger = {
     reviewListLoaded,
     reviewListUpdated,
     reviewListError,
-    reviewListUpdate
+    reviewListUpdate,
+    profileDetailsLoaded,
+    profileDetailsUpdated,
+    profileDetailsError,
+    generalInfoUpdated,
+    skillsLoad,
+    goalUpdate,
+    goalAdd,
 }
 
 export default logger

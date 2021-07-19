@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import PrivateRoute from "./components/Routing/PrivateRoute";
 import "./assets/css/App.scss";
 import Header from "./components/Header/Header";
+import Profile from "./components/Profile/Profile";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const App = () => {
                 <Switch>
                     <Route exact path="/login" render={(props) => ( <Layout> <Auth {...props}/> </Layout> )}/>
                     <PrivateRoute exact path="/" component={Dashboard}/>
+                    <PrivateRoute exact path="/profile/:id" component={Profile}/>
                     <Route render={() => <h1>Not found</h1>}/>
                 </Switch>
         </Router>

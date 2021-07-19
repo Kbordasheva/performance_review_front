@@ -1,0 +1,46 @@
+.visible-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-left: 30px;
+
+  .section-icon {
+    content: "";
+    background-image: url("../../../assets/img/Checkbox_empty.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    &::after {
+      content: "";
+      background-image: url("../../../assets/img/Plus.png");
+      background-size: 12px 12px;
+      height: 12px;
+      width: 12px;
+      background-color: transparent;
+      transition: all 0.2s ease;
+    }
+  }
+
+  .section-icon.active::after {
+    content: "";
+    background-image: url("../../../assets/img/Minus.png");
+    background-size: 12px 12px;
+    height: 12px;
+    width: 12px;
+    background-color: transparent;
+    transition: all 0.2s ease;
+  }
+
+  .title {
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+}
