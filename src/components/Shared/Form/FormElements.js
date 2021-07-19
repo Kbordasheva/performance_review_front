@@ -434,7 +434,7 @@ const CriteriaField = (props) => {
 
 
     const handleClick = (push) => {
-        push({text: '', isDone: false, startDate: '', deadline: '', finishDate: ''});
+        push({text: '', isDone: false, startDate: null, deadline: null, finishDate: null});
 
     }
     const [isFormVisible, setIsFormVisible] = useState(false)
