@@ -29,12 +29,10 @@ const GeneralInfo = (generalInfo) => {
 
     const onSkillsSelectChange = (option) => {
         setSelectedSkills([...selectedSkills, option]);
-        setEmployeeSkill(generalInfo.id, {
-          skills: option
-            ? option.map((skill) => {
-                return { skill_id: skill.value };
-              })
-            : [],
+        let skills = [];
+        option.forEach((skill) => skills.push(skill.value))
+        setEmployeeSkill(generalInfo.employeeId, {
+          skills: skills
         });
       };
 
@@ -72,7 +70,17 @@ const GeneralInfo = (generalInfo) => {
             fieldName: "position",
             type: "TextInput",
             label: "Position"
-        }, {
+        },{
+            fieldName: "seniority",
+            type: "Dropdown",
+            label: "Seniority",
+            options: [
+            {text: "Beginner", value: "beginner"},
+            {text: "Junior", value: "junior"},
+            {text: "Middle", value: "middle"},
+            {text: "Senior", value: "senior"},
+        ],
+        },{
             fieldName: "unit_id",
             type: "Dropdown",
             label: "Unit",

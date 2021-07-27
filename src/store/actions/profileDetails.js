@@ -37,9 +37,9 @@ export const getSkills = () => async (dispatch) => {
     }
 };
 
-export const setEmployeeSkill = (id, skills) => async dispatch => {
+export const setEmployeeSkill = async (id, skills) => {
     try {
-        const response = await axios.post(`/api/v1/employees/${id}/skills/`, skills);
+        const response = await axios.put(`/api/v1/employees/${id}/skills/`, skills);
         return response.data;
     } catch (error) {
         console.error(error);
