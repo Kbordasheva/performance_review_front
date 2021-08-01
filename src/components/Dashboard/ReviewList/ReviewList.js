@@ -4,12 +4,15 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { getReviewsList } from "../../../store/actions/reviewsList";
 import ReviewItem from "./ReviewItem/ReviewItem";
 import "./ReviewList.scss"
+import AddEmployeeForm from "./EmployeeModal/EmployeeModal";
 
 const ReviewList = () => {
   const dispatch = useDispatch();
+  const [isEmployeeFormVisible, setIsEmployeeFormVisible] = useState(false);
 
   const reviews = useSelector((state) => state.reviewList.reviewList);
   const next = useSelector((state) => state.reviewList.next);
+
 
   useEffect(() => {
     dispatch(getReviewsList());
@@ -22,10 +25,25 @@ const ReviewList = () => {
 
   return (
     <section>
+            {isEmployeeFormVisible && (
+        <AddEmployeeForm
+          setModalVisible={setIsEmployeeFormVisible}
+          isModalVisible={isEmployeeFormVisible}
+        />
+      )
+      }
       { reviews ?
         <>
-          <h3 className="panel-top-row">Performance review</h3>
-
+          <div className="review-list-top">
+            <h3>Performance review</h3>
+              <button
+                type="button"
+                className="button btn-form main-btn add-employee"
+                onClick={() => setIsEmployeeFormVisible(true)}
+              >
+                Add new Employee
+              </button>
+          </div>
           <InfiniteScroll
             dataLength={reviews.length}
             next={getNext}
