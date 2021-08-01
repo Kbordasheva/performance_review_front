@@ -81,7 +81,7 @@ const DateField = (props) => {
         <div className="form-group">
             {label && <label className={classNames(
                                   "control-label",
-                                  name === "birthDate"
+                                  name === "birthDate" || name === "employmentDate"
                                     ? "col-md-2"
                                     : ""
                                 )}
