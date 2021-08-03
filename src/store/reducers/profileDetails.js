@@ -20,11 +20,21 @@ const profileDetailsReducer = (state = initialState, action) => {
             profile: action.payload.profile,
         };
     case types.GENERAL_INFO_UPDATED:
-            return {
-                profile: { ...state.profile,
-                    generalInfo: { ...state.profile.employee,
-                    }}
+        return {
+            profile: { ...state.profile,
+                generalInfo: { ...state.profile.employee,
+                }}
         };
+    case types.REVIEW_ADD:
+      return {
+            profile:
+              { ...state.profile,
+                review: [
+                  action.payload.review,
+                  ...state.profile.review,
+                ],
+              },
+      };
     default:
         return {
             ...state,

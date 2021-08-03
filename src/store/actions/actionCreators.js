@@ -151,6 +151,15 @@ const goalAdd = (data) => {
     };
 }
 
+const ReviewAdd = (data) => {
+        return {
+        type: types.REVIEW_ADD,
+        payload: {
+            review: data,
+        },
+    };
+}
+
 const logger = {
     loginStart,
     loginSuccess,
@@ -167,6 +176,7 @@ const logger = {
     skillsLoad,
     goalUpdate,
     goalAdd,
+    ReviewAdd,
 }
 
 export default logger

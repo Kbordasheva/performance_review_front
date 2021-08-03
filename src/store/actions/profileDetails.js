@@ -100,6 +100,16 @@ export const addCriteria = async (reviewId, goalId, info) => {
     }
 };
 
+export const addReview = (data) => async dispatch => {
+    try {
+        const response = await axios.post(`/api/v1/reviews/`, data);
+        dispatch(actionCreators.ReviewAdd(response.data))
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 export const editAllGoals = (goals, reviewId) => {
     return dispatch => {
         const goalsPromises = goals.map((item) => {

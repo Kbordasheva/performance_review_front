@@ -75,7 +75,7 @@ const Goal = (props) => {
                             {formikProps.values.goalsInfo.length > 0 &&
                               formikProps.values.goalsInfo.map(
                                 (goalsInfo, formIndex) => (
-                                  <GoalsField
+                                  <GoalsField key={formIndex}
                                   formikProps={formikProps}
                                   formIndex={formIndex}
                                 />

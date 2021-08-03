@@ -48,7 +48,7 @@ const Profile = ({match}) => {
                 />
             </div>
             <div className="block">
-                <PerformanceReview reviews={profile.review}/>
+                <PerformanceReview reviews={profile.review} employeeId={genInfo.id}/>
             </div>
         </section>
     );
