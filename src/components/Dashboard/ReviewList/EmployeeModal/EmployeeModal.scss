@@ -3,19 +3,6 @@
   justify-content: center;
   flex-direction: column;
   padding: 0 3rem;
-
-  .modal-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-    font-family: "Roboto-Black", sans-serif;
-    text-align: center;
-  }
-
-  .title {
-    padding: 0.5rem 0 2rem 2.5rem;
-  }
 }
 
 @media (max-width: 768px) {

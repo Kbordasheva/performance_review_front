@@ -3,6 +3,7 @@ import Modal from '../../../Shared/Modal/Modal'
 import { addReview } from "../../../../store/actions/profileDetails";
 import AddReviewForm from "./AddReviewForm/AddReviewForm";
 import { useDispatch } from "react-redux";
+import "./AddReviewModal.scss"
 
 const AddReviewModal = (props) => {
 	const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const AddReviewModal = (props) => {
 	};
 
 	return (
-		<Modal isVisible={isModalVisible} setIsVisible={setModalVisible} size="l">
+		<Modal isVisible={isModalVisible} setIsVisible={setModalVisible} size="xs">
 			{formSubmitState === 'filling' && (
 				<div className="modal-review-container">
 					<div>
