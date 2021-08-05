@@ -176,7 +176,7 @@ export const addAllGoals = (goals, reviewId) => {
         })
         return Promise.all(goalsPromises).then((responses) => {
             responses.forEach((item) => {
-                dispatch(actionCreators.goalAdd(item));
+                dispatch(actionCreators.goalAdd(reviewId, item));
             })
         })
     }

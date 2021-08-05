@@ -46,7 +46,19 @@ const profileDetailsReducer = (state = initialState, action) => {
              : review,
          )
        }
-
+      };
+    case types.GOAL_ADD:
+      return {
+       profile: {
+         ...state.profile,
+         review: state.profile.review.map((item) => {
+               if (+item.id === +action.payload.reviewId) {
+            item.goals = [...item.goals, action.payload.goal]
+        }
+        return item
+           }
+         )
+       }
       };
     default:
         return {

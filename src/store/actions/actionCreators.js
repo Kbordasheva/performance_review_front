@@ -142,11 +142,12 @@ const goalUpdate = (data) => {
     };
 };
 
-const goalAdd = (data) => {
+const goalAdd = (reviewId, data) => {
         return {
         type: types.GOAL_ADD,
         payload: {
             goal: data,
+            reviewId: reviewId
         },
     };
 }
