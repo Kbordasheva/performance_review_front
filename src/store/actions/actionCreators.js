@@ -160,6 +160,16 @@ const ReviewAdd = (data) => {
     };
 }
 
+const GoalRemove = (reviewId, goalId) => {
+    return {
+        type: types.GOAL_REMOVE,
+        payload: {
+            goalId: goalId,
+            reviewId: reviewId
+        }
+    };
+}
+
 const logger = {
     loginStart,
     loginSuccess,
@@ -177,6 +187,7 @@ const logger = {
     goalUpdate,
     goalAdd,
     ReviewAdd,
+    GoalRemove,
 }
 
 export default logger

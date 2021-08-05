@@ -181,3 +181,13 @@ export const addAllGoals = (goals, reviewId) => {
         })
     }
 }
+
+export const deleteGoal = (reviewId, goalId) => async dispatch => {
+    try {
+        const response = await axios.delete(`/api/v1/reviews/${reviewId}/goals/${goalId}/delete/`);
+        dispatch(actionCreators.GoalRemove(reviewId, goalId))
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};

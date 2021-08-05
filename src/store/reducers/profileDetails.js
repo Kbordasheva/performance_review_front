@@ -1,4 +1,5 @@
 import {types} from "../actions/types";
+import { act } from "@testing-library/react";
 
 const initialState = {
     profile: null,
@@ -34,6 +35,18 @@ const profileDetailsReducer = (state = initialState, action) => {
                   ...state.profile.review,
                 ],
               },
+      };
+    case types.GOAL_REMOVE:
+      return {
+       profile: {
+         ...state.profile,
+         review: state.profile.review.map(
+           review => review.id === action.payload.reviewId ?
+             { ...review, goals: review.goals.filter(goal => goal.id !== action.payload.goalId) }
+             : review,
+         )
+       }
+
       };
     default:
         return {
