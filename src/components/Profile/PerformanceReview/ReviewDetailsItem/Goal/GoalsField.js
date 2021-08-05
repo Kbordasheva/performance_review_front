@@ -8,7 +8,7 @@ const formSchema = [
     },
     {
       fieldName: "text",
-      type: "TextInput",
+      type: "TextArea",
       label: "Goal",
     },
     {
@@ -24,7 +24,7 @@ const formSchema = [
 ];
 
 const GoalsField = (props) => {
-  const { formikProps, formIndex } = props;
+  const { formikProps, formIndex, reviewId, goalId } = props;
 
   return (
     <div className="goals-container" key={formIndex}>
@@ -34,10 +34,12 @@ const GoalsField = (props) => {
             field.type,
             {
               nameFieldArray: "goalsInfo",
+              reviewId,
+              goalId,
               formIndex,
               ...field,
             },
-            formikProps
+            formikProps,
           )}
         </div>
       ))}

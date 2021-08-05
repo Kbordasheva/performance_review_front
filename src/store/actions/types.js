@@ -19,6 +19,7 @@ export const types = {
 
     GOAL_UPDATE: "GOAL_UPDATE",
     GOAL_ADD: "GOAL_ADD",
+    GOAL_REMOVE: "GOAL_REMOVE",
 
     REVIEW_ADD: "REVIEW_ADD",
 };

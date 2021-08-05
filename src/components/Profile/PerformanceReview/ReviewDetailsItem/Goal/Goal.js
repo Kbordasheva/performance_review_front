@@ -78,6 +78,8 @@ const Goal = (props) => {
                                   <GoalsField key={formIndex}
                                   formikProps={formikProps}
                                   formIndex={formIndex}
+                                  reviewId={reviewId}
+                                  goalId={goalsInfo.id}
                                 />
                                 )
                               )}
@@ -87,7 +89,7 @@ const Goal = (props) => {
 
                             <button
                               type="button"
-                              className="button btn-form main-btn red"
+                              className="button btn-form main-btn"
                               onClick={() =>
                                 push(goalInitialValues)
                               }

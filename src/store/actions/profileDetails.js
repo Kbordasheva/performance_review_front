@@ -176,8 +176,18 @@ export const addAllGoals = (goals, reviewId) => {
         })
         return Promise.all(goalsPromises).then((responses) => {
             responses.forEach((item) => {
-                dispatch(actionCreators.goalAdd(item));
+                dispatch(actionCreators.goalAdd(reviewId, item));
             })
         })
     }
 }
+
+export const deleteGoal = (reviewId, goalId) => async dispatch => {
+    try {
+        const response = await axios.delete(`/api/v1/reviews/${reviewId}/goals/${goalId}/delete/`);
+        dispatch(actionCreators.GoalRemove(reviewId, goalId))
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};

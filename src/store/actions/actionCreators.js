@@ -142,11 +142,12 @@ const goalUpdate = (data) => {
     };
 };
 
-const goalAdd = (data) => {
+const goalAdd = (reviewId, data) => {
         return {
         type: types.GOAL_ADD,
         payload: {
             goal: data,
+            reviewId: reviewId
         },
     };
 }
@@ -157,6 +158,16 @@ const ReviewAdd = (data) => {
         payload: {
             review: data,
         },
+    };
+}
+
+const GoalRemove = (reviewId, goalId) => {
+    return {
+        type: types.GOAL_REMOVE,
+        payload: {
+            goalId: goalId,
+            reviewId: reviewId
+        }
     };
 }
 
@@ -177,6 +188,7 @@ const logger = {
     goalUpdate,
     goalAdd,
     ReviewAdd,
+    GoalRemove,
 }
 
 export default logger

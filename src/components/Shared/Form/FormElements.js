@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import {useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
-import notesImg from "../../../assets/img/note.svg";
+import deleteImg from "../../../assets/img/bin.svg";
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -18,6 +18,7 @@ import {
   FieldArray,
 } from "formik";
 import CheckboxHelp from "../CheckboxHelp/CheckBoxHelp";
+import { deleteGoal } from "../../../store/actions/profileDetails";
 
 export const Form = (props) => {
     return (
@@ -206,21 +207,32 @@ const ReactSelect = (props) => {
 };
 
 const Textarea = (props) => {
-    const {name, label, placeholder,formIndex, nameFieldArray, formikProps, ...rest} = props;
+    const {name, label, placeholder,formIndex, nameFieldArray, formikProps, reviewid, goalid, ...rest} = props;
     const fieldName = formIndex >= 0 ?  `${nameFieldArray}.${formIndex}.${name}`: `${name}`
+    const dispatch = useDispatch();
+
     return (
         <div className="form-group textarea-group column">
-            {label && <label className="control-label col-md-2" htmlFor={fieldName}>{label}:</label>}
-            <Field
+            <div>
+            {label && <label className="control-label" htmlFor={fieldName}>{label}:</label>}
+            <ErrorMessage name={fieldName} render={msg => <span className="error-textarea" style={{color: "red"}}>{msg}</span>}/>
+            </div>
+            <div className="form-error-container">
+                <Field
                 className="form-control col-md-6"
                 as="textarea"
                 name={fieldName}
                 id={fieldName}
                 placeholder={placeholder || ""}
                 {...rest}
+                />
+                <button type="button" className="tooltip-button" data-tip="Delete goal">
+                  <img className="delete-img" data-tooltip="Delete goal" src={deleteImg} alt={"delete goal"}
+                       onClick={() => dispatch(deleteGoal(reviewid, goalid))}
+                  />
+                </button>
+            </div>
 
-            />
-            <ErrorMessage name={fieldName} render={msg => <div style={{color: "red"}}>{msg}</div>}/>
         </div>
     )
 };
@@ -520,7 +532,9 @@ export const getFormElement = (type, field, formikProps) => {
         placeholder: field?.placeholder,
         formikProps: formikProps,
         formIndex: field?.formIndex,
-        nameFieldArray: field?.nameFieldArray
+        nameFieldArray: field?.nameFieldArray,
+        reviewid: field?.reviewId,
+        goalid: field?.goalId
     };
 
     switch (type) {
