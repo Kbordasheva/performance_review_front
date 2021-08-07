@@ -3,7 +3,6 @@ import { Doughnut } from "react-chartjs-2";
 
 
 const DoughnutChart = ({goalsDoneCount, goalsCount}) => {
-  console.log('goalsDoneCount', goalsDoneCount)
 
   const data = {
     datasets: [

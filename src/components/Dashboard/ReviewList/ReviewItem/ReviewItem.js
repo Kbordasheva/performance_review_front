@@ -20,9 +20,9 @@ const ReviewItem = ({employee}) => {
         <p>
           <strong>Skills: </strong>
           {employee.skills &&
-            employee.skills
-              .map((skill, i) => <span key={i}>{skill.name}</span>)
-              .reduce((prev, curr) => [prev, ", ", curr], null)}
+              employee.skills.map((skill, i) => (
+                <span key={i}>{`${i ? ", " : " "} ${skill.name}`}</span>
+              ))}
         </p>
         <p><strong>Email:</strong> {employee.email}</p>
       </div>

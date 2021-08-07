@@ -11,7 +11,11 @@ export const getReviewsList = (nextLink) => {
 
     axios.get(`/api/v1/employees/`, {params})
       .then(response => {
-        dispatch(actionCreators.reviewListUpdated(response.data));
+        if (nextLink) {
+          dispatch(actionCreators.reviewListUpdated(response.data));
+        } else {
+          dispatch(actionCreators.reviewListLoaded(response.data));
+        }
       })
       .catch(error => {
         console.error(error);
