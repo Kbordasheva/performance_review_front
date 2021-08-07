@@ -60,6 +60,22 @@ const profileDetailsReducer = (state = initialState, action) => {
          )
        }
       };
+    case types.CRITERIA_ADD:
+      return {
+       profile: {
+         ...state.profile,
+         review: state.profile.review.map(
+           review => review.id === action.payload.reviewId ?
+             { ...review,
+               goals: review.goals.map(
+                 goal => goal.id === action.payload.goalId ? {
+                   ...goal, criteria: [...goal.criteria, action.payload.criteria]
+                 } : goal
+               ) }
+             : review,
+         )
+       }
+      };
     default:
         return {
             ...state,

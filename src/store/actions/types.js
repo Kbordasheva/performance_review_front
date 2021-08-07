@@ -21,5 +21,7 @@ export const types = {
     GOAL_ADD: "GOAL_ADD",
     GOAL_REMOVE: "GOAL_REMOVE",
 
+    CRITERIA_ADD: "CRITERIA_ADD",
+
     REVIEW_ADD: "REVIEW_ADD",
 };
