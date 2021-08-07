@@ -1,4 +1,5 @@
 import { Form, getFormElement, SubmitButton } from "../../../../Shared/Form/FormElements";
+import * as Yup from 'yup';
 
 const employeeInitialValues = {
   firstName: "",
@@ -8,6 +9,13 @@ const employeeInitialValues = {
   unitId: "1",
   employmentDate: ""
 };
+
+const validationSchema = Yup.object().shape({
+	firstName: Yup.string().required('This field is required'),
+	lastName: Yup.string().required('This field is required'),
+  email: Yup.string().required('This field is required'),
+  employmentDate: Yup.date().required('This field is required'),
+});
 
 const AddEmployeeForm = (props) => {
   const { onSubmit } = props;
@@ -55,6 +63,7 @@ const AddEmployeeForm = (props) => {
           enableReinitialize
           initialValues={employeeInitialValues}
           onSubmit={onSubmit}
+          validationSchema={validationSchema}
       >
           {formSchema.map(field => (
               <div key={field.fieldName}>
