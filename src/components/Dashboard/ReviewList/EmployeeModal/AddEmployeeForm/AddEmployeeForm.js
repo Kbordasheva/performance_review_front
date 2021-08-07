@@ -32,7 +32,8 @@ const AddEmployeeForm = (props) => {
         }, {
             fieldName: "email",
             type: "TextInput",
-            label: "Email"
+            label: "Email",
+            placeholder: "example@email.com"
         }, {
             fieldName: "gender",
             type: "Dropdown",
