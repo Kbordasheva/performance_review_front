@@ -31,10 +31,23 @@ export const Form = (props) => {
 
 export const SubmitButton = (props) => {
     const {title, formikProps, ...rest} = props;
+
     const {isSubmitting} = useFormikContext();
+    const disabled = formikProps? !(formikProps.isValid && formikProps.dirty) : isSubmitting
 
     return (
-        <button type="submit" className="button btn-form main-btn" {...rest} disabled={isSubmitting}>{title}</button>
+        <button
+			type="submit"
+			className={classNames(
+				'button btn-form main-btn',
+				disabled ? 'btn-disabled' : ''
+			)}
+			{...rest}
+			disabled={disabled}
+		>
+			{title}
+		</button>
+
     )
 };
 
@@ -409,7 +422,7 @@ const CommentField = (props) => {
                 <div className="notes">
                   {field.value.length > 0 &&
                   <div className="notes-buttons">
-                    <SubmitButton title="Save notes"/>
+                    <SubmitButton title="Save comment"/>
                     <button
                       type="button"
                       className="button btn-form main-btn red"

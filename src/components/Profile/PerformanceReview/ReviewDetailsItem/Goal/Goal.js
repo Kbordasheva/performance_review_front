@@ -4,8 +4,17 @@ import { Formik, Form, FieldArray } from "formik";
 import { useDispatch } from "react-redux";
 import { getValuesToUpdate } from "../../../../../helpers";
 import GoalsField from "./GoalsField";
+import * as Yup from 'yup';
 import { addAllGoals, editAllGoals } from "../../../../../store/actions/profileDetails";
 import "./Goal.scss"
+
+const validationSchema = Yup.object().shape({
+	goalsInfo: Yup.array().of(
+		Yup.object().shape({
+			text: Yup.string().required('This field is required'),
+		})
+	),
+});
 
 const goalInitialValues = {
   text: "",
@@ -64,6 +73,7 @@ const Goal = (props) => {
               enableReinitialize
               initialValues={initialValues}
               onSubmit={onSubmit}
+              validationSchema={validationSchema}
               render={(formikProps) => {
                 return (
                   <Form>
