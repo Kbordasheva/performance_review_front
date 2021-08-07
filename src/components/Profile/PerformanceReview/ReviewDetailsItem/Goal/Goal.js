@@ -107,7 +107,7 @@ const Goal = (props) => {
                               )}
                           </div>
                           <div className="button-wrapper">
-                            <SubmitButton title="Save" />
+                            <SubmitButton title="Save goal" />
 
                             <button
                               type="button"
