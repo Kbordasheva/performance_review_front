@@ -12,6 +12,13 @@ const validationSchema = Yup.object().shape({
 	goalsInfo: Yup.array().of(
 		Yup.object().shape({
 			text: Yup.string().required('This field is required'),
+      criteria: Yup.array().of(
+        Yup.object().shape({
+          text: Yup.string().required('This field is required'),
+          startDate: Yup.date().required('This field is required'),
+          deadline: Yup.date().required('This field is required'),
+        })
+      ),
 		})
 	),
 });
