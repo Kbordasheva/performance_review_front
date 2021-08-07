@@ -15,8 +15,8 @@ const validationSchema = Yup.object().shape({
       criteria: Yup.array().of(
         Yup.object().shape({
           text: Yup.string().required('This field is required'),
-          startDate: Yup.date().required('This field is required'),
-          deadline: Yup.date().required('This field is required'),
+          startDate: Yup.date().required('This field is required').nullable(),
+          deadline: Yup.date().required('This field is required').nullable(),
         })
       ),
       comments: Yup.array().of(

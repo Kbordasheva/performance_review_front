@@ -508,11 +508,10 @@ const CriteriaField = (props) => {
                     name={`${fieldName}.${index}.finishDate`}
                     label={"Finish Date"}
                   />
-                  <SubmitButton className="button btn-form main-btn criteria-submit" title="Save"/>
                 </div>
               ))}
 
-
+              <SubmitButton className="button btn-form main-btn criteria-submit" title="Save"/>
               <button
                 type="button"
                 className="button btn-form main-btn red"
