@@ -182,6 +182,17 @@ const criteriaAdd = (data, reviewId, goalId) => {
     };
 }
 
+const commentAdd = (data, reviewId, goalId) => {
+        return {
+        type: types.COMMENT_ADD,
+        payload: {
+            comment: data,
+            reviewId: reviewId,
+            goalId: goalId
+        },
+    };
+}
+
 const logger = {
     loginStart,
     loginSuccess,
@@ -201,6 +212,7 @@ const logger = {
     ReviewAdd,
     GoalRemove,
     criteriaAdd,
+    commentAdd,
 }
 
 export default logger

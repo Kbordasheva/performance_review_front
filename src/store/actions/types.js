@@ -23,5 +23,7 @@ export const types = {
 
     CRITERIA_ADD: "CRITERIA_ADD",
 
+    COMMENT_ADD: "COMMENT_ADD",
+
     REVIEW_ADD: "REVIEW_ADD",
 };

@@ -19,6 +19,11 @@ const validationSchema = Yup.object().shape({
           deadline: Yup.date().required('This field is required'),
         })
       ),
+      comments: Yup.array().of(
+        Yup.object().shape({
+          text: Yup.string().required('This field is required'),
+        })
+      ),
 		})
 	),
 });
