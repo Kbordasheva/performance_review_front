@@ -3,7 +3,14 @@ import Select from "react-select";
 import { Form, getFormElement, SubmitButton } from "../../Shared/Form/FormElements";
 import { editGeneralInfo, getSkills, setEmployeeSkill } from "../../../store/actions/profileDetails";
 import { useEffect, useState } from "react";
+import * as Yup from 'yup';
 import "./GeneralInfo.scss"
+
+const validationSchema = Yup.object().shape({
+			fullName: Yup.string().required('This field is required'),
+			email: Yup.string().required('This field is required'),
+			seniority: Yup.string().required('This field is required'),
+		})
 
 const GeneralInfo = (generalInfo) => {
     const dispatch = useDispatch();
@@ -75,6 +82,7 @@ const GeneralInfo = (generalInfo) => {
             type: "Dropdown",
             label: "Seniority",
             options: [
+            {text: 'Select...', value: "", hidden: true},
             {text: "Beginner", value: "beginner"},
             {text: "Junior", value: "junior"},
             {text: "Middle", value: "middle"},
@@ -111,6 +119,7 @@ const GeneralInfo = (generalInfo) => {
                     enableReinitialize
                     initialValues={generalInfo}
                     onSubmit={onSubmit}
+                    validationSchema={validationSchema}
                 >
                     {formSchema.map(field => (
                         <div key={field.fieldName}>
