@@ -73,12 +73,16 @@ export const editComments = async (reviewId, goalId, commentId, info) => {
     }
 };
 
-export const addComments = async (reviewId, goalId, info) => {
-    try {
-        const response = await axios.post(`/api/v1/reviews/${reviewId}/goals/${goalId}/comments/`, info);
-        return response.data;
-    } catch (error) {
-        console.error(error);
+export const addComments = (reviewId, goalId, info) => {
+    return dispatch => {
+        return axios.post(`/api/v1/reviews/${reviewId}/goals/${goalId}/comments/`, info)
+          .then(response => {
+              dispatch(actionCreators.commentAdd(response.data, reviewId, goalId));
+              return response.data;
+          })
+          .catch(error => {
+              console.error(error);
+          })
     }
 };
 
@@ -91,12 +95,16 @@ export const editCriteria = async (reviewId, goalId, criteriaId, info) => {
     }
 };
 
-export const addCriteria = async (reviewId, goalId, info) => {
-    try {
-        const response = await axios.post(`/api/v1/reviews/${reviewId}/goals/${goalId}/criteria/`, info);
-        return response.data;
-    } catch (error) {
-        console.error(error);
+export const addCriteria = (reviewId, goalId, info) => {
+    return dispatch => {
+        return axios.post(`/api/v1/reviews/${reviewId}/goals/${goalId}/criteria/`, info)
+          .then(response => {
+              dispatch(actionCreators.criteriaAdd(response.data, reviewId, goalId));
+              return response.data;
+          })
+          .catch(error => {
+              console.error(error);
+          })
     }
 };
 
@@ -122,7 +130,7 @@ export const editAllGoals = (goals, reviewId) => {
                             if (comment.id) {
                                 return editComments(reviewId, item.id, comment.id, { ...comment });
                             } else {
-                                return addComments(reviewId, item.id, { ...comment });
+                                return dispatch(addComments(reviewId, item.id, { ...comment }));
                             }
                         }
                         else return null
@@ -132,7 +140,7 @@ export const editAllGoals = (goals, reviewId) => {
                             if (criteria.id) {
                                 return editCriteria(reviewId, item.id, criteria.id, { ...criteria });
                             } else {
-                                return addCriteria(reviewId, item.id, { ...criteria });
+                                return dispatch(addCriteria(reviewId, item.id, { ...criteria }));
                             }
                         }
                         else return null
@@ -159,13 +167,13 @@ export const addAllGoals = (goals, reviewId) => {
                 .then(async (response) => {
                     const commentsPromise = item.comments.map((comment) => {
                         if (comment) {
-                            return addComments(reviewId, response.id, {...comment});
+                            return dispatch(addComments(reviewId, response.id, {...comment}));
                         }
                         else return null
                     });
                     const criteriaPromise = item.criteria.map((criteria) => {
                         if (criteria) {
-                            return addCriteria(reviewId, response.id, {...criteria});
+                            return dispatch(addCriteria(reviewId, response.id, {...criteria}));
                         }
                         else return null
                     });

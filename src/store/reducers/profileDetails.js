@@ -60,6 +60,38 @@ const profileDetailsReducer = (state = initialState, action) => {
          )
        }
       };
+    case types.CRITERIA_ADD:
+      return {
+       profile: {
+         ...state.profile,
+         review: state.profile.review.map(
+           review => review.id === action.payload.reviewId ?
+             { ...review,
+               goals: review.goals.map(
+                 goal => goal.id === action.payload.goalId ? {
+                   ...goal, criteria: [...goal.criteria, action.payload.criteria]
+                 } : goal
+               ) }
+             : review,
+         )
+       }
+      };
+    case types.COMMENT_ADD:
+      return {
+       profile: {
+         ...state.profile,
+         review: state.profile.review.map(
+           review => review.id === action.payload.reviewId ?
+             { ...review,
+               goals: review.goals.map(
+                 goal => goal.id === action.payload.goalId ? {
+                   ...goal, comments: [...goal.comments, action.payload.comment]
+                 } : goal
+               ) }
+             : review,
+         )
+       }
+      };
     default:
         return {
             ...state,

@@ -1,6 +1,12 @@
 .left-info {
   width: 70%;
+
+  .form-group {
+  display: flex;
+  align-items: center;
+  }
 }
+
 .right-info {
   width: 30%;
 }

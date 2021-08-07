@@ -171,6 +171,28 @@ const GoalRemove = (reviewId, goalId) => {
     };
 }
 
+const criteriaAdd = (data, reviewId, goalId) => {
+        return {
+        type: types.CRITERIA_ADD,
+        payload: {
+            criteria: data,
+            reviewId: reviewId,
+            goalId: goalId
+        },
+    };
+}
+
+const commentAdd = (data, reviewId, goalId) => {
+        return {
+        type: types.COMMENT_ADD,
+        payload: {
+            comment: data,
+            reviewId: reviewId,
+            goalId: goalId
+        },
+    };
+}
+
 const logger = {
     loginStart,
     loginSuccess,
@@ -189,6 +211,8 @@ const logger = {
     goalAdd,
     ReviewAdd,
     GoalRemove,
+    criteriaAdd,
+    commentAdd,
 }
 
 export default logger
