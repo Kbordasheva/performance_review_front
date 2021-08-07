@@ -1,10 +1,12 @@
 .left-info {
   width: 70%;
-}
-.right-info {
-  width: 30%;
-}
-.form-group {
+
+  .form-group {
   display: flex;
   align-items: center;
+  }
+}
+
+.right-info {
+  width: 30%;
 }
