@@ -10,7 +10,7 @@ const ReviewDetailsItem = (props) => {
         setIsFormVisible(!isFormVisible)
     }
 
-  const { review, review_id } = props;
+  const { review, review_id, employeeId } = props;
 
   return (
     <div className="review-year">
@@ -20,6 +20,7 @@ const ReviewDetailsItem = (props) => {
         <Goal
           reviewId={review_id}
           goalsInfo={review.goals}
+          employeeId={employeeId}
         />
       </div>
       }

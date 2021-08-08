@@ -3,14 +3,12 @@ import {Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 import {login} from "../../store/actions/auth";
-// import Spinner from '../Shared/Spinner/Spinner';
 import "./Auth.scss";
 
 const Auth = () => {
     const dispatch = useDispatch();
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    // const loading = useSelector((state) => state.auth.loading);
     const [userInput, setUserInput] = useState({
         username: "",
         password: "",
@@ -28,9 +26,6 @@ const Auth = () => {
         dispatch(login(userInput));
     };
 
-    // if (loading) {
-    //     return <Spinner />;
-    // }
 
     if (isAuthenticated) {
         return <Redirect to="/"/>;

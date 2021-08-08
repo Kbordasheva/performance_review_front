@@ -65,6 +65,18 @@ const reviewListUpdated = (data) => {
     };
 };
 
+const employeeGoalsDoneCount = (employeeId, data) => {
+    return {
+        type: types.EMPLOYEE_GOALS_DONE_COUNT,
+        payload: {
+            data: data,
+            employeeId: employeeId
+        },
+    };
+};
+
+
+
 const reviewListError = () => {
     return {
         type: types.REVIEW_LIST_ERROR,
@@ -142,6 +154,17 @@ const goalUpdate = (data) => {
     };
 };
 
+const goalIsDone = (reviewId, goalId, data) => {
+    return {
+        type: types.GOAL_IS_DONE,
+        payload: {
+            data: data,
+            reviewId: reviewId,
+            goalId: goalId,
+        },
+    };
+};
+
 const goalAdd = (reviewId, data) => {
         return {
         type: types.GOAL_ADD,
@@ -213,6 +236,8 @@ const logger = {
     GoalRemove,
     criteriaAdd,
     commentAdd,
+    goalIsDone,
+    employeeGoalsDoneCount,
 }
 
 export default logger

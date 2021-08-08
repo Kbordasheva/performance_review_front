@@ -55,6 +55,21 @@ export const editGoal = async (review_id, goal_id, data) => {
     }
 };
 
+export const editGoalIsDone = (review_id, goal_id, employeeId, data) => {
+    return dispatch => {
+        return axios.put(`/api/v1/reviews/${review_id}/goals/${goal_id}/done/`, data)
+          .then(response => {
+              // return response.data;
+              dispatch(actionCreators.goalIsDone(review_id, goal_id, response.data));
+              dispatch(actionCreators.employeeGoalsDoneCount(employeeId, response.data));
+          })
+          .catch(error => {
+              console.error((error));
+          })
+    }
+    ;
+}
+
 export const addGoal = async (id, data) => {
     try {
         const response = await axios.post(`/api/v1/reviews/${id}/goals/`, data);

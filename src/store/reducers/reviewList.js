@@ -39,6 +39,21 @@ const reviewListReducer = (state = initialState, action) => {
                       : item;
                 }),
             };
+        case types.EMPLOYEE_GOALS_DONE_COUNT:
+            return {
+                ...state,
+                reviewList: state.reviewList.map((item) => {
+                    if (item.id === action.payload.employeeId) {
+                        if (action.payload.data.isDone) {
+                            item.goalsDoneCount += 1
+                        } else {
+                            item.goalsDoneCount -= 1
+                        }
+                    }
+                    return item;
+                }),
+
+            };
         case types.LOG_OUT:
             return {
                 reviewList: [],
