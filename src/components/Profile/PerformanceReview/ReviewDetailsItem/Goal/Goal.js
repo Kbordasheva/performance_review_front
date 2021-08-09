@@ -30,7 +30,6 @@ const validationSchema = Yup.object().shape({
 
 const goalInitialValues = {
   text: "",
-  isDone: false,
   criteria: [],
   comments: [],
 
@@ -38,7 +37,6 @@ const goalInitialValues = {
 
 const comparisonFields = [
   "text",
-  "isDone",
   "criteria",
   "comments"
 ];
@@ -46,7 +44,7 @@ const comparisonFields = [
 const Goal = (props) => {
   const dispatch = useDispatch();
 
-  const { reviewId, goalsInfo } = props;
+  const { reviewId, goalsInfo, employeeId } = props;
 
     const initialValues = {
     goalsInfo: goalsInfo.length
@@ -102,12 +100,14 @@ const Goal = (props) => {
                                   formIndex={formIndex}
                                   reviewId={reviewId}
                                   goalId={goalsInfo.id}
+                                  isGoalDoneInfo={goalsInfo.isDone}
+                                  employeeId={employeeId}
                                 />
                                 )
                               )}
                           </div>
                           <div className="button-wrapper">
-                            <SubmitButton title="Save goal" />
+                            <SubmitButton title="Save" />
 
                             <button
                               type="button"

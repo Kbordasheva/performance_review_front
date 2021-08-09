@@ -1,5 +1,4 @@
 import {types} from "../actions/types";
-import { act } from "@testing-library/react";
 
 const initialState = {
     profile: null,
@@ -58,6 +57,22 @@ const profileDetailsReducer = (state = initialState, action) => {
         return item
            }
          )
+       }
+      };
+    case types.GOAL_IS_DONE:
+      return {
+       profile: {
+         ...state.profile,
+         review: state.profile.review.map((item) => {
+                    if(+item.id === +action.payload.reviewId) {
+                        item.goals.forEach((goal, index) => {
+                            if (goal.id === +action.payload.goalId) {
+                                goal.isDone = action.payload.data.isDone
+                            }
+                        })
+                    }
+                    return item
+                  })
        }
       };
     case types.CRITERIA_ADD:

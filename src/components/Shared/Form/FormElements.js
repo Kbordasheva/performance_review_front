@@ -310,6 +310,7 @@ const Radios = (props) => {
 
 const Checkboxes = (props) => {
     const {name, label, options, formIndex, nameFieldArray} = props;
+
     const fieldName = formIndex >= 0 ?  `${nameFieldArray}.${formIndex}.${name}`: `${name}`
         return (
         <div className="form-group">
@@ -339,7 +340,7 @@ const Checkboxes = (props) => {
     )
 };
 const Checkbox = (props) => {
-    const {name, label,updateselectvalueroot, formikProps, formIndex, nameFieldArray} = props;
+    const {name, label, updateselectvalueroot, formikProps, formIndex, nameFieldArray} = props;
     const fieldName = formIndex >= 0 ?  `${nameFieldArray}.${formIndex}.${name}`: `${name}`
     const handleChange = (e) => {
         const value = e.target.checked ? true : false

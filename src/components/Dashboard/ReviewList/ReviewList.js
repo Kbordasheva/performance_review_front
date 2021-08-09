@@ -13,6 +13,7 @@ const ReviewList = () => {
   const reviews = useSelector((state) => state.reviewList.reviewList);
   const next = useSelector((state) => state.reviewList.next);
 
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     dispatch(getReviewsList());
@@ -36,6 +37,7 @@ const ReviewList = () => {
         <>
           <div className="review-list-top">
             <h3>Performance review</h3>
+            {(user?.isManager || user?.isAdmin) &&
               <button
                 type="button"
                 className="button btn-form main-btn add-employee"
@@ -43,6 +45,7 @@ const ReviewList = () => {
               >
                 Add new Employee
               </button>
+              }
           </div>
           <InfiniteScroll
             dataLength={reviews.length}

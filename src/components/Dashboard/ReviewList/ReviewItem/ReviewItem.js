@@ -6,10 +6,6 @@ const ReviewItem = ({employee}) => {
 
   return (
     <article className="ReviewItem">
-      {/*<div className="info-name">*/}
-
-      {/*  <div>Progress</div>*/}
-      {/*</div>*/}
       <div className="left-info">
         <p className="ReviewItem__name">
           <Link to={'/profile/' + employee.id}>{employee.fullName}</Link>
