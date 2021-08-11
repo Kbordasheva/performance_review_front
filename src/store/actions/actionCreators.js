@@ -145,12 +145,11 @@ const skillsLoad = (data) => {
     };
 }
 
-const goalUpdate = (reviewId, goalId, data) => {
+const goalUpdate = (reviewId, data) => {
     return {
         type: types.GOAL_UPDATE,
         payload: {
             reviewId: reviewId,
-            goalId: goalId,
             goal: data,
         },
     };
