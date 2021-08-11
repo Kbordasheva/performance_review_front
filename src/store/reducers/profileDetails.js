@@ -59,6 +59,22 @@ const profileDetailsReducer = (state = initialState, action) => {
          )
        }
       };
+    case types.GOAL_UPDATE:
+      return {
+       profile: {
+         ...state.profile,
+         review: state.profile.review.map((item) => {
+                    if(+item.id === +action.payload.reviewId) {
+                        item.goals.forEach((goal, index) => {
+                            if (goal.id === +action.payload.goalId) {
+                                goal.text = action.payload.goal.text;
+                            }
+                        })
+                    }
+                    return item
+                  })
+       }
+      };
     case types.GOAL_IS_DONE:
       return {
        profile: {

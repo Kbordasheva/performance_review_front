@@ -46,25 +46,27 @@ export const setEmployeeSkill = async (id, skills) => {
     }
 };
 
-export const editGoal = async (review_id, goal_id, data) => {
-    try {
-        const response = axios.put(`/api/v1/reviews/${review_id}/goals/${goal_id}/`, data);
-        return response.data;
-    } catch (error) {
-        console.error((error));
-    }
-};
+export const editGoal = (review_id, goal_id, data) => {
+    return dispatch => {
+        return axios.put(`/api/v1/reviews/${review_id}/goals/${goal_id}/`, data)
+          .then(response => {
+              dispatch(actionCreators.goalUpdate(review_id, goal_id, response.data));
+          })
+          .catch(error => {
+              console.error(error);
+          })
+    };
+}
 
 export const editGoalIsDone = (review_id, goal_id, employeeId, data) => {
     return dispatch => {
         return axios.put(`/api/v1/reviews/${review_id}/goals/${goal_id}/done/`, data)
           .then(response => {
-              // return response.data;
               dispatch(actionCreators.goalIsDone(review_id, goal_id, response.data));
               dispatch(actionCreators.employeeGoalsDoneCount(employeeId, response.data));
           })
           .catch(error => {
-              console.error((error));
+              console.error(error);
           })
     }
     ;
@@ -136,9 +138,9 @@ export const addReview = (data) => async dispatch => {
 export const editAllGoals = (goals, reviewId) => {
     return dispatch => {
         const goalsPromises = goals.map((item) => {
-            return editGoal(reviewId, item.id, {
+            return dispatch(editGoal(reviewId, item.id, {
                 ...item,
-            })
+            }))
                 .then(async (response) => {
                     const commentsPromise = item.comments.map((comment) => {
                         if (comment) {
