@@ -66,7 +66,7 @@ const profileDetailsReducer = (state = initialState, action) => {
          review: state.profile.review.map((item) => {
                     if(+item.id === +action.payload.reviewId) {
                         item.goals.forEach((goal, index) => {
-                            if (goal.id === +action.payload.goalId) {
+                            if (goal.id === +action.payload.goal.id) {
                                 goal.text = action.payload.goal.text;
                             }
                         })

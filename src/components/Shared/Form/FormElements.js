@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReactTooltip from "react-tooltip";
 import deleteImg from "../../../assets/img/bin.svg";
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
@@ -70,8 +69,6 @@ const TextField = (props) => {
                     "form-control",
                     name === "text"
                       ? "col-md-7"
-                      : name === "address"
-                      ? "col-md-5"
                       : "col-md-3"
                   )}
                 type="text"
@@ -118,26 +115,6 @@ const DateField = (props) => {
         </div>
     )
 };
-const TimeField = (props) => {
-    const {name, label, formIndex, nameFieldArray} = props;
-    const fieldName = formIndex >= 0 ?  `${nameFieldArray}.${formIndex}.${name}`: `${name}`
-
-    return (
-        <div className="form-group">
-            {label && <label className="control-label col-md-2" htmlFor={fieldName}>{label}:</label>}
-
-            <Field
-                className="form-control time-input"
-                as="input"
-                id={fieldName}
-                name={fieldName}
-                type="time"
-            />
-            {/* {notify && <span className="notify-icon"></span>} */}
-            <ErrorMessage name={fieldName} render={msg => <div style={{color: "red"}}>{msg}</div>}/>
-        </div>
-    )
-};
 
 const SelectField = (props) => {
     const {name, label, options, formIndex, nameFieldArray} = props;
@@ -152,7 +129,6 @@ const SelectField = (props) => {
                 id={fieldName}
                 name={fieldName}
             >
-                {/*<option value="">Please select...</option>*/}
                 {options.map((opt, index) =>
                     <option value={opt.value} key={opt.key || index} label={opt.text || opt.value}/>)}
             </Field>
@@ -160,41 +136,7 @@ const SelectField = (props) => {
         </div>
     )
 };
-const CustomSelect = (props) => {
-    const {name, label, options, updateselectvalueroot, formikProps,formIndex, nameFieldArray, ...rest} = props;
-    const onChange = (e) => {
-        const options = e.target.options
-        formikProps.setFieldValue(name, e.target.value)
-        if(updateselectvalueroot){
-            if(name === 'cityId') {
-                updateselectvalueroot(options[options.selectedIndex].label)
-            }
-            else {
-                updateselectvalueroot(e.target.value)
-            }
-        }
-    };
 
-    return (
-        <div className="form-group">
-            {label && <label className="control-label col-md-2" htmlFor={name}>{label}:</label>}
-            <Field
-                className="form-control col-sm-3"
-                as="select"
-                id={name}
-                name={name}
-                onChange={onChange}
-                {...rest}
-            >
-                {options.map((opt, index) =>
-                    <option value={opt.id || opt.value} key={opt.id || index} label={opt.name || opt.label || opt.text}
-                            hidden={opt.hidden}/>)}
-            </Field>
-
-            <ErrorMessage name={name} render={msg => <div style={{color: "red"}}>{msg}</div>}/>
-        </div>
-    )
-};
 const ReactSelect = (props) => {
     const {name, label, options} = props;
 
@@ -208,7 +150,6 @@ const ReactSelect = (props) => {
                 id={name}
                 name={name}
             >
-                {/*<option value="">Please select...</option>*/}
                 {options.map((opt, index) =>
                     <option value={opt.id || opt.value} key={opt.id || index} label={opt.name || opt.label || opt.text}
                             hidden={opt.hidden}/>)}
@@ -250,95 +191,6 @@ const Textarea = (props) => {
     )
 };
 
-const Radios = (props) => {
-    const { name, label, formIndex, nameFieldArray, options } = props;
-    const fieldName =
-      formIndex >= 0 ? `${nameFieldArray}.${formIndex}.${name}` : `${name}`;
-
-    return (
-      <div className="custom-radio">
-        <h4 className="relocation-type" id="my-radio-group">
-          {label}
-        </h4>
-
-        {options.map((option, index) => (
-          <div
-            className="relocation-group"
-            role="group"
-            aria-labelledby="my-radio-group"
-            key={index}
-          >
-            <div className="relocation-group-radio">
-              <div className="relocation-type-input">
-                <Field
-                  type="radio"
-                  name={fieldName}
-                  value={option.value}
-                  className="custom-control-input"
-                  id={option.key}
-                />
-                <label className="custom-radio__label" htmlFor={option.key}>
-                  <span></span>
-                </label>
-              </div>
-
-              <label>
-                {option.label}
-
-                {option.tooltip && (
-                  <span>
-                    <button className="tooltip-button" type="button" data-tip={option.tooltip} data-for={option.label}>
-                      {/*<img src={QuestionIcon} alt="question" />*/}
-                    </button>
-                    <ReactTooltip
-                      id={option.label}
-                      place="top"
-                      type="dark"
-                      effect="solid"
-                      html={true}
-                    />
-                  </span>
-                )}
-              </label>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-
-const Checkboxes = (props) => {
-    const {name, label, options, formIndex, nameFieldArray} = props;
-
-    const fieldName = formIndex >= 0 ?  `${nameFieldArray}.${formIndex}.${name}`: `${name}`
-        return (
-        <div className="form-group">
-            {label && <label className="control-label col-md-2" htmlFor={name}>{label}</label>}
-            {options.map((opt) => {
-                const checkboxKey = opt.key
-                return(
-                <div key={opt.key} className="custom-control custom-checkbox option-inline">
-                    <Field
-                        className="custom-control-input"
-                        type="checkbox"
-                        id={checkboxKey}
-                        name={fieldName}
-                        value={opt.value}
-                    />
-                    <label
-                        className="custom-checkbox__label"
-                        htmlFor={checkboxKey}
-                    >
-                        <span></span>{opt.text}
-                    </label>
-                </div>
-            )}
-            )}
-            <ErrorMessage name={fieldName} render={msg => <div style={{color: "red"}}>{msg}</div>}/>
-        </div>
-    )
-};
 const Checkbox = (props) => {
     const {name, label, updateselectvalueroot, formikProps, formIndex, nameFieldArray} = props;
     const fieldName = formIndex >= 0 ?  `${nameFieldArray}.${formIndex}.${name}`: `${name}`
@@ -401,12 +253,12 @@ const CommentField = (props) => {
                       const updatedAt = value?.updatedAt?.slice(0, 16);
                       const createdDate = new Date(createdAt);
                       const updatedDate = new Date(updatedAt)
-                      const labelNote = (createdAt === updatedAt) ?
+                      const labelComment = (createdAt === updatedAt) ?
                         `${(moment(createdDate).format('L') + ' ' + value?.author + ' ' + 'wrote:')}` :
-                        `${(moment(updatedDate).format('L') + ' ' + value?.author + '(edit) ' + 'wrote:')}`
+                        `${(moment(updatedDate).format('L') + ' ' + value?.author + '(edited) ' + 'wrote:')}`
                       return (
-                        <div className="note" key={index}>
-                          {value?.author && <p> {labelNote}</p>}
+                        <div className="comment" key={index}>
+                          {value?.author && <p> {labelComment}</p>}
                           <Field
                             className="form-control col-md-6"
                             as="textarea"
@@ -420,9 +272,9 @@ const CommentField = (props) => {
                   )}
                 </>
 
-                <div className="notes">
-                  {field.value.length > 0 &&
-                  <div className="notes-buttons">
+                <div className="comments">
+                  {field.value.length > 0 && (formikProps.dirty) &&
+                  <div className="comments-buttons">
                     <SubmitButton title="Save comment"/>
                     <button
                       type="button"
@@ -527,7 +379,7 @@ const CriteriaField = (props) => {
 
         </FieldArray>
         }
-                            </div>
+      </div>
 
     )
 };
@@ -540,8 +392,6 @@ export const getFormElement = (type, field, formikProps) => {
         disabled: field.disabled,
         options: field.options,
         updateselectvalueroot: field.updateselectvalueroot,
-        notify: field.notify,
-        notify_days: field.notifyDaysBefore,
         placeholder: field?.placeholder,
         formikProps: formikProps,
         formIndex: field?.formIndex,
@@ -552,18 +402,11 @@ export const getFormElement = (type, field, formikProps) => {
 
     switch (type) {
         case "TextInput":
-        case "NumberInput":
            return <TextField {...props} />
         case "DatePicker":
             return <DateField {...props} />
-        case "TimeField":
-            return <TimeField {...props} />
         case "Dropdown":
             return <SelectField {...props} />
-        case "Checkboxes":
-            return <Checkboxes {...props} />
-        case "Radios":
-            return <Radios {...props} />
         case "Checkbox":
             return <Checkbox {...props} />
         case "TextArea":
@@ -572,8 +415,6 @@ export const getFormElement = (type, field, formikProps) => {
             return <CriteriaField {...props} />
         case "ReactSelect":
             return <ReactSelect {...props} />
-        case "CustomSelect":
-            return <CustomSelect {...props} />
         case "CommentField":
             return <CommentField {...props}/>
         default:
