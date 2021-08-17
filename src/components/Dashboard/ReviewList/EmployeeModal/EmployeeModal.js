@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 
 const EmployeeModal = (props) => {
   const dispatch = useDispatch();
-  const { setModalVisible, isModalVisible } = props;
+  const { setModalVisible, isModalVisible, user } = props;
   const [formSubmitState, setFormSubmitState] = useState("filling");
 
   const onSubmit = (values, { setSubmitting, resetForm, setStatus }) => {
@@ -32,7 +32,7 @@ const EmployeeModal = (props) => {
             </h3>
           </div>
 
-          <AddEmployeeForm onSubmit={onSubmit}/>
+          <AddEmployeeForm onSubmit={onSubmit} user={user}/>
         </div>
       )}
       {formSubmitState === "success" && (

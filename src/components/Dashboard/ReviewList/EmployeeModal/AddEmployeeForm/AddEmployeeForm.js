@@ -1,15 +1,6 @@
 import { Form, getFormElement, SubmitButton } from "../../../../Shared/Form/FormElements";
 import * as Yup from 'yup';
 
-const employeeInitialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  gender: "1",
-  unitId: "1",
-  employmentDate: ""
-};
-
 const validationSchema = Yup.object().shape({
 	firstName: Yup.string().required('This field is required'),
 	lastName: Yup.string().required('This field is required'),
@@ -18,7 +9,16 @@ const validationSchema = Yup.object().shape({
 });
 
 const AddEmployeeForm = (props) => {
-  const { onSubmit } = props;
+  const { onSubmit, user } = props;
+
+  const employeeInitialValues = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  gender: "1",
+  unitId: user.unit === 'U1' ? "1" : "2",
+  employmentDate: ""
+};
 
   const formSchema = [
         {
@@ -46,10 +46,13 @@ const AddEmployeeForm = (props) => {
             fieldName: "unit_id",
             type: "Dropdown",
             label: "Unit",
-            options: [
+            options: user.unit === 'U1' ? [
             {text: "U1", value: "1"},
             {text: "U2", value: "2"},
-        ],
+        ] : [
+          {text: "U2", value: "2"},
+          {text: "U1", value: "1"},
+            ],
         }, {
             fieldName: "employmentDate",
             type: "DatePicker",

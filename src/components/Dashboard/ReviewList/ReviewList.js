@@ -30,6 +30,7 @@ const ReviewList = () => {
         <AddEmployeeForm
           setModalVisible={setIsEmployeeFormVisible}
           isModalVisible={isEmployeeFormVisible}
+          user={user}
         />
       )
       }
