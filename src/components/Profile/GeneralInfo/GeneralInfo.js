@@ -6,10 +6,13 @@ import { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import "./GeneralInfo.scss"
 
+const phoneRegExp = /^\+375(\s+)?\(?(17|29|33|44)\)?(\s+)?[0-9]{3}-?[0-9]{2}-?[0-9]{2}$/
+
 const validationSchema = Yup.object().shape({
 			fullName: Yup.string().required('This field is required'),
-			email: Yup.string().required('This field is required'),
+			email: Yup.string().email('Invalid email format').required('This field is required'),
 			seniority: Yup.string().required('This field is required'),
+      phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
 		})
 
 const GeneralInfo = (generalInfo) => {
@@ -74,7 +77,7 @@ const GeneralInfo = (generalInfo) => {
             fieldName: "phone",
             type: "TextInput",
             label: "Phone",
-            placeholder: "+XXX XX XXXXXXX"
+            placeholder: "+375XXXXXXXXX"
         }, {
             fieldName: "position",
             type: "TextInput",

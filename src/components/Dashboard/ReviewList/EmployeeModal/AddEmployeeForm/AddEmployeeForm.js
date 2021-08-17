@@ -13,7 +13,7 @@ const employeeInitialValues = {
 const validationSchema = Yup.object().shape({
 	firstName: Yup.string().required('This field is required'),
 	lastName: Yup.string().required('This field is required'),
-  email: Yup.string().required('This field is required'),
+  email: Yup.string().email('Invalid email format').required('This field is required'),
   employmentDate: Yup.date().required('This field is required'),
 });
 
