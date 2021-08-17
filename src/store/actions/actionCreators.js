@@ -217,6 +217,13 @@ const commentAdd = (data, reviewId, goalId) => {
     };
 }
 
+const EmployeeAdd = (data) => {
+        return {
+        type: types.EMPLOYEE_ADD,
+        payload: data
+    };
+}
+
 const logger = {
     loginStart,
     loginSuccess,
@@ -239,6 +246,7 @@ const logger = {
     commentAdd,
     goalIsDone,
     employeeGoalsDoneCount,
+    EmployeeAdd,
 }
 
 export default logger

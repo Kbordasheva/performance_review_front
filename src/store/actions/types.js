@@ -29,4 +29,6 @@ export const types = {
     COMMENT_ADD: "COMMENT_ADD",
 
     REVIEW_ADD: "REVIEW_ADD",
+
+    EMPLOYEE_ADD: "EMPLOYEE_ADD",
 };

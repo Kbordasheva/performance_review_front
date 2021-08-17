@@ -39,6 +39,11 @@ const reviewListReducer = (state = initialState, action) => {
                       : item;
                 }),
             };
+        case types.EMPLOYEE_ADD:
+            return {
+                ...state,
+                reviewList: [action.payload, ...state.reviewList]
+            }
         case types.EMPLOYEE_GOALS_DONE_COUNT:
             return {
                 ...state,

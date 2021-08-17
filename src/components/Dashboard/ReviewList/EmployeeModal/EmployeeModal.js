@@ -3,13 +3,15 @@ import { useState } from "react";
 import AddEmployeeForm from "./AddEmployeeForm/AddEmployeeForm";
 import { addEmployee } from "../../../../store/actions/employee";
 import "./EmployeeModal.scss"
+import { useDispatch } from "react-redux";
 
 const EmployeeModal = (props) => {
+  const dispatch = useDispatch();
   const { setModalVisible, isModalVisible } = props;
   const [formSubmitState, setFormSubmitState] = useState("filling");
 
   const onSubmit = (values, { setSubmitting, resetForm, setStatus }) => {
-    addEmployee(values)
+    dispatch(addEmployee(values))
       .then((response) => {
         setFormSubmitState("success");
       })
