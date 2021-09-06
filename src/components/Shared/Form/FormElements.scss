@@ -46,6 +46,12 @@
     align-items: center;
     width: 100%;
   }
+
+  .react-datepicker-wrapper {
+    display: inline-block;
+    padding: 0;
+    border: 0;
+  }
 }
 
 .btn-form {
@@ -150,6 +156,7 @@
     padding: 0;
     border: 0;
     margin-right: 20px;
+
   }
   .react-datepicker__input-container {
     position: relative;
